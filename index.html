@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petits Scénarii - Nos Merveilleux Souvenirs de Famille</title>
+    
+    <!-- Importation des polices Google Fonts manuscrites -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Indie+Flower&family=Comfortaa:wght@300;400;700&family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Image de fond avec transparence */
+			body{
+			  font-family: 'Comfortaa', 'Quicksand', sans-serif;
+			  /* ton SVG pattern peut rester ici */
+			  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'>...</svg>");
+			  background-attachment: fixed;
+			  background-size: cover;
+			  background-repeat: no-repeat;
+
+			  min-height: 100vh;
+			  position: relative; /* nécessaire pour le stacking */
+			  color: #333;
+			  line-height: 1.6;
+			}
+
+			body::before{
+			  content: "";
+			  position: fixed;
+			  inset: 0;
+
+			  background-image: url("images/fond.jpg"); /* chemin depuis le HTML */
+			  background-size: cover;
+			  background-position: center;
+			  background-repeat: no-repeat;
+
+			  opacity: 0.15;
+			  pointer-events: none;
+
+			  z-index: 0; /* couche fond */
+			}
+
+			/* Tout le contenu au-dessus */
+			body > *{
+			  position: relative;
+			  z-index: 1;
+			}
+
+
+        /* Header et Navigation */
+        header {
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.9) 0%, rgba(135, 206, 235, 0.9) 50%, rgba(152, 217, 142, 0.9) 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            overflow: hidden;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Conteneur pour les flocons */
+        .snowflakes-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Style des flocons */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1.5em;
+            opacity: 0.8;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            animation: snowfall linear infinite;
+            z-index: 10;
+        }
+
+        /* Animation des flocons */
+        @keyframes snowfall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(500px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Variations d'animation pour plus de naturalité */
+        @keyframes snowfall-left {
+            0% {
+                transform: translateY(0) translateX(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(500px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes snowfall-slow {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(500px) translateX(80px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes snowfall-fast {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(500px) translateX(120px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        header h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 5.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25);
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 20;
+        }
+
+        header p {
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.3rem;
+            opacity: 0.98;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 20;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        nav button {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ffb6d9 0%, #add8e6 100%);
+            color: white;
+            cursor: pointer;
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        nav button.active {
+            background: linear-gradient(135deg, #ff1493 0%, #1e90ff 100%);
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+        }
+
+        /* Conteneur principal */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            min-height: calc(100vh - 300px);
+        }
+
+        /* Grille d'histoires */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.94);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 5px solid #ff69b4;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(3px);
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255, 105, 180, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .story-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .story-card.chloe {
+            border-left-color: #ff69b4;
+        }
+
+        .story-card.alexander {
+            border-left-color: #87ceeb;
+        }
+
+        .story-card.helena {
+            border-left-color: #98d98e;
+        }
+
+        .story-card.general {
+            border-left-color: #ffd700;
+        }
+
+        .story-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff69b4 0%, #87ceeb 100%);
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-family: 'Comfortaa', sans-serif;
+            box-shadow: 0 2px 6px rgba(255, 105, 180, 0.3);
+        }
+
+        .story-card h3 {
+            color: #ff1493;
+            margin-bottom: 0.7rem;
+            font-size: 1.4rem;
+            font-family: 'Caveat', cursive;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .story-card .character-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-family: 'Comfortaa', sans-serif;
+        }
+
+        .character-tag.chloe {
+            background-color: #ffe0ec;
+            color: #c2185b;
+        }
+
+        .character-tag.alexander {
+            background-color: #e0f7ff;
+            color: #0277bd;
+        }
+
+        .character-tag.helena {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .story-preview {
+            color: #555;
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-family: 'Indie Flower', cursive;
+        }
+
+/* Texte des vignettes en plus lisible */
+.story-card{
+  color: #222;           /* couleur par défaut plus foncée */
+  font-weight: 600;      /* semi-bold pour tout le contenu */
+}
+
+.story-card .story-preview{
+  font-weight: 700;      /* bold pour le résumé */
+  color: #333;           /* plus contrasté que #555 */
+}
+
+/* Optionnel : le lien "Lire la suite" aussi */
+.story-card .read-more{
+  font-weight: 700;
+}
+
+
+
+        .read-more {
+            color: #ff69b4;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 1rem;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+            color: #ff1493;
+        }
+
+        /* Modal pour la lecture complète */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.98);
+            margin: 5% auto;
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            color: #ff69b4;
+            float: right;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .close-btn:hover {
+            color: #ff1493;
+            transform: scale(1.2);
+        }
+
+        .modal-content h2 {
+            color: #ff1493;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .modal-content p {
+            color: #333;
+            line-height: 1.9;
+            margin-bottom: 1rem;
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.05rem;
+        }
+
+/* La boîte du modal doit être "relative" pour contenir le ::before */
+/* Boîte du modal */
+#modal .modal-content{
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.92);
+  isolation: isolate; /* crée un contexte d’empilement propre */
+}
+
+/* Image de fond translucide */
+#modal .modal-content::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("images/fond-modal.png") center / cover no-repeat;
+  opacity: 0.15;
+  z-index: -1;          /* derrière le contenu dans ce contexte */
+  pointer-events: none;
+}
+
+/* Ton texte reste au-dessus */
+#modal .modal-content h2,
+#modal .modal-content p,
+#modal .modal-content span,
+#modal .modal-content div{
+  position: relative;
+  z-index: 1;
+}
+
+#modal-body > div > p{
+  font-family: 'Kalam', cursive;
+  font-weight: 700;  /* vrai gras dispo avec Kalam [web:348] */
+  color: #222;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+        /* Filtres */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.3rem;
+            border: 2px solid #ddd;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.98rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #666;
+            font-family: 'Comfortaa', sans-serif;
+            backdrop-filter: blur(3px);
+        }
+
+        .filter-btn:hover {
+            border-color: #ff69b4;
+            color: #ff69b4;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #ff69b4 0%, #87ceeb 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+        }
+
+        /* Section "À propos" */
+        .about-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .about-section h2 {
+            color: #ff1493;
+            margin-bottom: 1.5rem;
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .about-section h3 {
+            color: #87ceeb;
+            margin: 1.5rem 0 1rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+        }
+
+        .about-section p {
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.05rem;
+        }
+
+        .about-section strong {
+            color: #ff69b4;
+            font-family: 'Comfortaa', sans-serif;
+        }
+		/* Met en gras uniquement les <p> de la section À propos */
+			#about-section .about-section p{
+			  font-weight: 700; /* bold [web:279] */
+			  color: #222;      /* optionnel : meilleur contraste */
+			}
+
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.9) 0%, rgba(135, 206, 235, 0.9) 50%, rgba(152, 217, 142, 0.9) 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        footer p {
+            margin: 0.7rem 0;
+            opacity: 0.96;
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.05rem;
+        }
+
+        footer p:last-child {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Affichage/Masquage des sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 20% auto;
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+
+            .modal-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .modal-content p {
+                font-size: 1rem;
+            }
+
+            nav {
+                gap: 0.5rem;
+            }
+
+            nav button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .about-section {
+                padding: 1.5rem;
+            }
+
+            .about-section h2 {
+                font-size: 2rem;
+            }
+
+            .about-section h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Scrollbar personnalisée */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 182, 217, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ff69b4 0%, #87ceeb 100%);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff1493 0%, #1e90ff 100%);
+        }
+		
+		.site-header{
+  position: relative;
+  display: flex;
+  flex-direction: row;          /* force l’alignement gauche-centre-droite [web:122] */
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 16px;
+}
+
+/* Flocons en overlay */
+.site-header .snowflakes-container{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Centre */
+.site-header .header-center{
+  flex: 1 1 auto;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Images latérales : même hauteur, sans déformation */
+.site-header .header-photo{
+  height: 90px;
+  width: 140px;
+  object-fit: contain;          /* conserve le ratio sans déformer */
+  display: block;
+  flex: 0 0 auto;
+  z-index: 1;
+}
+
+    </style>
+
+<style>
+.story-image{
+  width: 100%;
+  height: 280px;              /* choisis la hauteur souhaitée */
+  object-fit: cover;          /* conserve le ratio, recadre si nécessaire [web:79] */
+  object-position: center;    /* centre le cadrage */
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+.site-header{
+  position: relative;              /* pour "contenir" l’overlay flocons */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 16px;
+}
+
+/* Flocons en arrière-plan, sans gêner les clics */
+.site-header .snowflakes-container{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header-center{
+  text-align: center;
+  flex: 1 1 auto;
+  z-index: 1;                      /* au-dessus des flocons */
+}
+
+/* Les deux images latérales */
+.header-photo{
+  height: 180px;                    /* même hauteur pour les 2 */
+  width: 280px;                    /* boîte fixe (stable visuellement) */
+  object-fit: contain;             /* conserve le ratio, pas de déformation [web:83] */
+  display: block;
+  flex: 0 0 auto;
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 600px){
+  .header-photo{ height: 60px; width: 90px; }
+  .site-header{ gap: 10px; }
+}
+
+.story-image{
+  cursor: zoom-in;
+}
+
+.img-lightbox{
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0,0,0,0.75);
+  z-index: 9999;
+}
+
+.img-lightbox.is-open{ display: flex; }
+
+.img-lightbox img{
+  max-width: min(95vw, 1200px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.img-lightbox__close{
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.about-video{
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-video__player{
+  width: min(900px, 100%);
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  background: #000;
+}
+
+
+</style>
+
+</head>
+<body>
+<header class="site-header">
+  <div class="snowflakes-container" id="snowflakesContainer"></div>
+
+  <img class="header-photo header-photo--left"
+       src="images/enfants.png"
+       alt="Enfants">
+
+  <div class="header-center">
+    <h1>Nos petites histoires</h1>
+    <p>Un trésor de souvenirs familiaux</p>
+  </div>
+
+  <img class="header-photo header-photo--right"
+       src="images/parents.png"
+       alt="Parents">
+</header>
+
+
+
+    <nav>
+        <button class="nav-btn active" data-filter="all">📖 Toutes les histoires</button>
+        <button class="nav-btn" data-filter="chloe">💕 Chloé</button>
+        <button class="nav-btn" data-filter="alexander">🔵 Alexandre</button>
+        <button class="nav-btn" data-filter="helena">💚 Héléna</button>
+        <button class="nav-btn" data-filter="about">ℹ️ À propos</button>
+    </nav>
+
+    <main>
+        <!-- Section Toutes les histoires -->
+		
+        <div class="section active" id="all-section">
+			<!--
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Toutes</button>
+                <button class="filter-btn" data-filter="chloe">Chloé</button>
+                <button class="filter-btn" data-filter="alexander">Alexandre</button>
+                <button class="filter-btn" data-filter="helena">Héléna</button>
+            </div>
+			-->
+            <div class="stories-grid" id="stories-container"></div>
+        </div>
+		
+        <!-- Section À propos -->
+        <div class="section" id="about-section">
+            <div class="about-section">
+                <h2> Bienvenue et bonne lecture</h2>
+                <p>Ce site a été créé pour nous replonger dans les moments merveilleux et drôles que nous avons vécus avec vous  : <strong>Héléna</strong>, <strong>Alexandre</strong> et <strong>Chloé</strong>.</p>
+                <p>Chaque histoire recueillie ici est un petit instant de tendresse, de joie, d'insouciance et d'enfance que nous avons souhaité, votre maman et moi, conserver dans notre coeur et partager avec vous.</p>
+                <p>Nous vous proposons un voyage dans le passé, celui de votre enfance qui était fait de rires, d'émotions et de souvenirs précieux. Ces moments simples de la vie quotidienne sont en réalité les plus grands cadeaux que vous avez pu nous offrir.</p>
+				
+                <hr style="margin: 2rem 0; border: none; border-top: 2px solid #eee;">
+				
+							<!-- Vidéo après la section À propos -->
+				<div class="about-video">
+				  <video class="about-video__player"
+						 autoplay
+						 loop
+						 muted
+						 playsinline
+						 preload="metadata">
+					<source src="videos/vid1.mp4" type="video/mp4">
+					
+					Votre navigateur ne supporte pas la lecture vidéo HTML5.
+				  </video>
+				</div>
+				
+                <h3>Votre personnalité a émergé jour après jour</h3>
+				<p><strong style="color: #98d98e;">Héléna 💚</strong> - Responsable et droite, tu est le pilier de la fratrie avec son caractère affirmé.</p>
+				<p><strong style="color: #87ceeb;">Alexandre 🔵</strong> - Tendre, curieux et plein de sensibilité, tu as des mots et des gestes d'une grande sagesse et d'une grande noblesse.</p>
+                <p><strong style="color: #ff69b4;">Chloé 💕</strong> - Malicieuse, créative et pleine d'humour, tu nous as régalés de ses réparties et de ses petites ruses.</p>
+                
+                
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- Modal pour la lecture complète -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>💜 Créé avec amour pour raviver nos souvenirs de famille</p>
+        <p>© 2026 - Petits Scénarii - Tous les droits réservés</p>
+    </footer>
+
+    <script>
+        // ===== GESTION DES FLOCONS =====
+        class SnowflakeAnimation {
+            constructor() {
+                this.container = document.getElementById('snowflakesContainer');
+                this.snowflakeCount = 15; // Nombre de flocons
+                this.init();
+            }
+
+            init() {
+                this.createSnowflakes();
+                // Créer continuellement de nouveaux flocons
+                setInterval(() => this.createSnowflakes(), 2000);
+            }
+
+            createSnowflakes() {
+                for (let i = 0; i < 3; i++) {
+                    const snowflake = document.createElement('div');
+                    snowflake.className = 'snowflake';
+                    snowflake.textContent = this.getRandomSnowflake();
+                    
+                    // Position aléatoire en haut de l'header
+                    const randomLeft = Math.random() * 100;
+                    snowflake.style.left = randomLeft + '%';
+                    
+                    // Durée aléatoire de la chute (entre 6 et 12 secondes)
+                    const duration = 6 + Math.random() * 6;
+                    
+                    // Animation aléatoire
+                    const animations = [
+                        'snowfall',
+                        'snowfall-left',
+                        'snowfall-slow',
+                        'snowfall-fast'
+                    ];
+                    const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+                    
+                    snowflake.style.animation = `${randomAnimation} ${duration}s linear forwards`;
+                    
+                    // Délai aléatoire
+                    const delay = Math.random() * 2;
+                    snowflake.style.animationDelay = delay + 's';
+                    
+                    this.container.appendChild(snowflake);
+                    
+                    // Supprimer le flocon après l'animation
+                    setTimeout(() => snowflake.remove(), (duration + delay) * 1000);
+                }
+            }
+
+            getRandomSnowflake() {
+                const snowflakes = ['❄️', '❅', '❆', '✿', '✾', '⛄', '🎄', '✨'];
+                return snowflakes[Math.floor(Math.random() * snowflakes.length)];
+            }
+        }
+
+        // Initialiser l'animation des flocons
+        new SnowflakeAnimation();
+
+        // Base de données des histoires
+        const stories = [
+            {
+                id: 1,
+                character: 'helena',
+                title: 'La télévision interdite',
+				image: 'images/famille_62.png', // Ajoutez le chemin
+                preview: 'Chloé arrive dans la salle à manger, voit la télévision allumée et Héléna allongée sur le canapé...',
+                content: 'Chloé arrive dans la salle à manger, voit la télévision allumée et Héléna allongée sur le canapé. Aussitôt, elle se dirige vers la télévision et l\'éteint. Sa conclusion : tu es punie de télévision par papa !'
+            },
+            {
+                id: 2,
+                character: 'alexander',
+                title: 'Les calculs des bonbons',
+				image: 'images/famille_61.png', // Ajoutez le chemin
+                preview: 'Titi, assis à la table de la salle à manger, entrain de manger des calculs amusants...',
+                content: 'Titi, assis à la table de la salle à manger, entrain de manger : je lui demande s\'il veut jouer aux devinettes. Il me répond qu\'il préfèrerait plutôt les calculs.\n\nPremier calcul : Chloé t\'offre 5 bonbons et tu en manges 2. Combien t\'en reste-t-il ?\n\nCa, c\'est facile. Il m\'en reste … 3.\n\nBravo Titi c\'est bien ça.\n\nHéléna te donne 5 bonbons et ta maman t\'en ajoute 3. Toi tu en manges 5. Combien t\'en reste-t-il ?\n\nOh ! C\'est encore facile ! Il m\'en reste …. (longues minutes de réflexion)\n\nJe mets alors la minuterie. Tic Tac, Tic Tac …\n\nNon papa, arrête ! Tu m\'empêches de réfléchir.\n\nOk, vas-y, réfléchis.\n\n… (Titi entrain de réfléchir)\n\nCa y est. J\'ai trouvé ! Ca donne 3.\n\nBravo Titi. Tu as réussi à trouver ! Maintenant plus difficile ! Tu écoutes bien. Je te donne 3 bonbons et toi tu en manges 4. Combien t\'en reste-t-il ?\n\nQuelques instants de réflexion.\n\nPapa ! Me dit-il d\'un air outré. Tu m\'as fait un piège ! C\'est impossible ! …'
+            },
+            {
+                id: 3,
+                character: 'chloe',
+                title: 'Une surprise sucrée',
+				image: 'images/famille_45.png', // Ajoutez le chemin
+                preview: 'Chloé de retour des courses avec ses parents... elle a une surprise pour les enfants !',
+                content: 'Chloé de retour des courses avec son papa et sa maman. Elle a entre les mains un sachet de bonbons au chocolat qu\'elle a subtilisé dans l\'un des sacs. Elle se précipite à l\'entrée de la maison et dit d\'un air ravi :\n\nLes enfants, les enfants ! Une surprise !!!\n\nTada !'
+            },
+            {
+                id: 4,
+                character: 'chloe',
+                title: 'Les mots amusants de Chloé bébé',
+				image: 'images/famille_9.png', // Ajoutez le chemin
+                preview: 'Le langage particulier de Chloé quand elle était bébé...',
+                content: 'Il faut savoir que Chloé, étant bébé, s\'est mise à parler très tôt. A ce titre, elle avait à l\'époque un langage bien particulier.\n\nQuand elle souhaitait descendre de sa poussette, elle disait : "Coucouma" (Chloé se glissant comme une anguille vers le bas de sa poussette pour descendre).\n\nEn revanche, quand elle faisait tomber quelque chose (ce qui était, soi-dit en passant, extrêmement rare), elle disait : "il est bombé le verre" (verre entrain de tomber par inadvertance)\n\nLorsqu\'elle est gonflée par la rage de s\'être sentie offensée, elle n\'hésite pas à lancer : "Vivotte Titi" quand ce dernier a été particulièrement indélicat à son égard. Il s\'ensuit évidemment qu\'elle lui court derrière pour le mordre.'
+            },
+            {
+                id: 5,
+                character: 'alexander',
+                title: 'L\'heure du lit non négociable',
+				image: 'images/famille_41.png', // Ajoutez le chemin
+                preview: 'Chloé fait rester Alexandre à l\'écart de l\'ordinateur...',
+                content: 'Après dîner, Chloé était entrain de jouer tranquillement sur l\'ordinateur quant Titi s\'approcha d\'elle et lui demanda s\'il pouvait à son tour jouer.\n\nAussitôt, elle s\'écrie : "Non, Alexandre. Tu dois aller te mettre au lit."\n\nTiti, surpris, lui répond : "Je n\'ai pas école demain."\n\nMais Chloé reste inflexible dans son jugement !'
+            },
+            {
+                id: 6,
+                character: 'chloe',
+                title: 'Convaincue des monstres... et du Père Noël',
+				image: 'images/famille_47.png', // Ajoutez le chemin
+                preview: 'Chloé discute avec sa maman sur l\'existence des créatures fantastiques...',
+                content: 'Chloé, en discussion sérieuse avec sa maman. "Tu sais, maman, les monstres, ça n\'existe pas. Les sorcières aussi et aussi les monstres" lui dit-elle en essayant de se persuader elle-même de ses propos. Elle s\'arrête un moment et ajoute : "Mais, le père Noël, lui, il existe ! Il apporte plein de jouets pour les enfants."'
+            },
+            {
+                id: 7,
+                character: 'chloe',
+                title: 'La négociation à la librairie',
+				image: 'images/famille_50.png', // Ajoutez le chemin
+                preview: 'À MaxiLivre, Chloé échange un livre contre un autre avec stratégie...',
+                content: 'Chloé et Titi adorent se rendre à la librairie MaxiLivre qui est au Parc des expositions de Villepinte et s\'attarder au rayon pour enfants. Ce jour-là, voilà quelques propos échangés au hasard de la discussion :\n\n"Alexandre, laisse-moi regarder le livre sur halloween. Je l\'ai pas vu.".\n\n"Non, c\'est moi qui l\'ai pris et je n\'ai pas fini de le lire."\n\nLa réponse de Titi n\'était pas du tout pour lui plaire et on l\'observe à la fois dépitée et plongée dans une profonde réflexion. Tout d\'un coup, elle a une idée : elle se dirige vers un livre exposé sur l\'étalage et le tend à Titi.\n\n"Regarde Alexandre, ce que j\'ai trouvé. Un livre sur les pirates !"\n\n"Oh chouette, montre-le-moi."\n\n"Donne-moi d\'abord le livre sur halloween et après, je te le passerai !"'
+            },
+            {
+                id: 8,
+                character: 'chloe',
+                title: 'Le vol du yaourt amusant',
+				image: 'images/famille_49.png', // Ajoutez le chemin
+                preview: 'À table, Chloé subtilise le yaourt de son papa avec malice...',
+                content: 'A table, des situations parfois cocasses peuvent survenir. Un soir, au moment du dessert, Chloé me subtilise mon pot de yaourt et ma cuillère. Ayant fait mine de ne rien remarquer, elle me dit alors d\'un air espiègle :\n\n"Je t\'ai pris ton yaourt et ta cuillère !"\n\nJe la regarde interloqué et je fais mine de pleurer en lui répondant :\n\n"Je n\'ai plus de yaourt à manger ! Je suis très triste."\n\nElle se lève et vient prendre un yaourt dans le paquet, juste à côté de moi. Elle le met en face de moi et me précise : "Mais non, il reste encore des yaourts".\n\nJe lui dis alors toujours en gémissant : "Oui, mais je n\'ai rien pour le manger".\n\nElle part alors à la cuisine, en ramène une petite cuillère et me dit souverainement pour conclure : "Tiens maintenant et qu\'on n\'en parle plus !".'
+            },
+            {
+                id: 9,
+                character: 'alexander',
+                title: 'Une mauvaise odeur à la partie de cartes',
+				image: 'images/famille_17.png', // Ajoutez le chemin
+                preview: 'Chloé et Alexandre jouent aux cartes quand une odeur apparaît...',
+                content: 'Chloé et Alexandre, assis tous les deux sur le canapé, entrain de jouer aux cartes à Donjons et Dragon. On entend alors :\n\n"Alexandre, je crois que je sens une mauvaise odeur."\n\n"Respire avec la bouche, c\'est rien !"'
+            },
+            {
+                id: 10,
+                character: 'chloe',
+                title: 'L\'échange gagnant à l\'école',
+				image: 'images/famille_10.png', // Ajoutez le chemin
+                preview: 'Chloé raconte un échange spectaculaire de billes à l\'école...',
+                content: '"Je vais vous raconter une histoire très drôle qui s\'est passé à l\'école la dernière fois. Figurez-vous que j\'ai réussi à échanger une vulgaire bille "œil de chat" qui ne valait pas grand\' chose contre une bille émeraude qui est très précieuse. Devinez comment il s\'appelait celui qui me l\'a échangé ?\n\nEt bien, il s\'appelait Abdellah … comme papa !"'
+            },
+            {
+                id: 11,
+                character: 'alexander',
+                title: 'Le marron en forme de cœur',
+				image: 'images/famille_40.png', // Ajoutez le chemin
+                preview: 'Alexandre ramène un marron avec une tâche spéciale de son école...',
+                content: 'Alexandre s\'adressant à moi :\n\n"A la sortie en classe nature, je t\'ai ramené ce marron"\n\n"C\'est gentil, tu peux le poser là, sur le bureau, si tu veux bien."\n\n"Papa. Je voudrais que tu le regardes bien. Ça ne prendra pas beaucoup de temps. Qu\'est-ce que tu remarques ?"\n\n"Je ne vois pas quelque chose de particulier Alexandre"\n\n"Observe la forme de la tâche qui est dessus"\n\nJe regarde et constate : "Oui, en effet, elle a la forme d\'un cœur"\n\nEt Alexandre, avec beaucoup de sérieux et de tendresse : "C\'est pour ça que je te l\'offre à toi, mon papa, parce que je t\'aime beaucoup."'
+            },
+            {
+                id: 12,
+                character: 'chloe',
+                title: 'L\'entraide fraternelle',
+				image: 'images/famille_60.png', // Ajoutez le chemin
+                preview: 'Chloé défend le droit de son frère à l\'aider même si elle triche...',
+                content: '"Chloé. Donne-moi le nom de trois objets qui commencent par la lettre P."\n\nIl s\'ensuit alors que son frère lui souffle à tout va les réponses aux questions que je lui pose.\n\n"Alexandre, arrête d\'aider ta petite sœur. Elle doit trouver les réponses toute seul aux questions. Et toi, Chloé, arrête de tricher et réfléchis."\n\nChloé me fixe alors en se concentrant sur la réponse qu\'elle souhaite me donner :\n\n"Papa. C\'est normal qu\'Alexandre cherche à m\'aider. Nous sommes frère et sœur !"'
+            },
+            {
+                id: 13,
+                character: 'alexander',
+                title: 'La boule rebondissante pour la grande sœur',
+				image: 'images/famille_60.png', // Ajoutez le chemin
+                preview: 'Au magasin Carrefour, Alexandre demande une boule pour sa grande sœur...',
+                content: 'Au magasin Carrefour de Voiron, en compagnie d\'Alexandre, de Chloé et de leur maman, nous sommes arrêtés à proximité du rayon "boissons" par un animateur faisant des tours de magies. Il nous propose l\'offre du jour sur les jus d\'oranges et offre au passage des boules rebondissantes aux enfants. Chloé prend le cadeau et lorsque c\'est au tour d\'Alexandre, celui-ci s\'adresse alors au magicien en lui disant :\n\n"Ce serait très gentil si vous pouviez m\'ajouter une boule pour ma grande sœur qui n\'est pas venu avec nous. Je pense que cela lui fera énormément plaisir."\n\n"Je n\'en ai pas pour tout le monde, mais comme tu l\'as demandé si gentiment, en voilà une pour ta grande sœur."'
+            },
+            {
+                id: 14,
+                character: 'chloe',
+                title: 'Les préférences confuses',
+				image: 'images/famille_56.png', // Ajoutez le chemin
+                preview: 'Une petite confusion de chiffres avec Papa...',
+                content: 'Chloé, quel est le repas préféré d\'Alexandre ?\n\nC\'est facile. C\'est frites, steak, cordon bleu.\n\nEt pour Maman, quels sont ses trois films préférés ?\n\nIl y a Troie, ….\n\nEt après ?\n\nIl y a quatre !'
+            },
+            {
+                id: 15,
+                character: 'chloe',
+                title: 'Le petit déjeuner de ses souvenirs',
+				image: 'images/famille_15.png', // Ajoutez le chemin
+                preview: 'Chloé rêve du petit déjeuner qu\'elle prenait à trois ans...',
+                content: 'Alors Chloé ? Qu\'est-ce que tu veux pour ton petit déjeuner ?\n\nJe veux du café au lait avec une brioche comme quand j\'avais trois ans. (Au moment des faits, elle en a cinq).'
+            },
+            {
+                id: 16,
+                character: 'alexander',
+                title: 'Le matin précoce avec Chloé',
+				image: 'images/famille_23.png', // Ajoutez le chemin
+                preview: 'Alexandre se réveille tôt et dérange la sieste matinale de Chloé...',
+                content: 'Alexandre se réveilla exceptionnellement tôt ce matin-là. Chloé était déjà allongée sur le canapé du salon sous sa couette.\n\nAlexandre, ce n\'est pas encore l\'heure de se réveiller. Tu peux retourner dans la chambre te coucher. Je t\'appellerai lorsque ce sera l\'heure.\n\nNon, Maman. Je n\'ai plus envie de retourner dormir. Chloé. Pourrais-tu pousser tes pieds pour que je puisse m\'asseoir ?\n\nChloé (contrariée). Non Alexandre, tu fais ce que Maman t\'a dit.'
+            },
+            {
+                id: 17,
+                character: 'chloe',
+                title: 'Une princesse ne transporte rien',
+				image: 'images/famille_19.png', // Ajoutez le chemin
+                preview: 'En sortant de l\'école, Chloé se comporte comme une véritable princesse...',
+                content: 'En allant chercher Chloé à son école maternelle, elle m\'accueille avec une énorme pochette contenant ses dessins. Je transporte la pochette jusqu\'à la voiture en taquinant la clochette sur la grande quantité de combustible qu\'elle ramène pour la cheminée.\n\nAprès avoir récupéré son frère et stationné en face de chez nous, je constate qu\'elle reste dans la voiture sans bouger. Je lui ouvre la porte et lui indique qu\'elle se comporte comme une princesse. Elle sort et je lui ajoute en sortant sa pochette du coffre qu\'il est temps maintenant qu\'elle s\'en occupe. Sans broncher, elle me regarde et me répond : "une princesse ne transporte rien".'
+            },
+            {
+                id: 18,
+                character: 'chloe',
+                title: 'L\'interdiction de courir dans les escaliers',
+				image: 'images/famille_20.png', // Ajoutez le chemin
+                preview: 'Au stade, Chloé rappelle les règles de sécurité à Alexandre...',
+                content: 'Après une matinée sportive au stade en compagnie d\'Alexandre, Chloé et Malika, nous voilà en bas de l\'escalier et à côté de l\'ascenseur. Lequel prendre ?\n\nMalika nous oriente alors vers l\'escalier pour continuer sur la lignée sportive. Voyant l\'hésitation d\'Alexandre, je lance alors que le dernier arrivé sera un poisson pourri. La clochette s\'engage alors vivement dans la montée des escaliers prenant ainsi de l\'avance sur son frère. Au deuxième étage, Alexandre tente de la dépasser mais Chloé lui rappelle qu\'il est interdit de courir dans les escaliers. Se moquant parfaitement de ce détail, Alexandre la double et à ce moment Chloé l\'attrape d\'une main sur l\'épaule et le bloque dans sa course, le faisant presque tomber. Malika lui dit que ce n\'est pas bien de le retenir dans les escaliers et qu\'elle a failli lui faire mal.\n\nSans se démonter, alors qu\'elle reçoit des coups d\'Alexandre qui n\'était pas content du tout du tour qu\'elle lui a joué, elle répond qu\'il est interdit de courir dans les escaliers et qu\'Alexandre n\'écoute jamais ce qu\'on lui dit.'
+            },
+            {
+                id: 19,
+                character: 'alexander',
+                title: 'L\'insulte des figurines',
+				image: 'images/famille_29.png', // Ajoutez le chemin
+                preview: 'Alexandre se moque de Chloé avec une figurine de cochon...',
+                content: 'Chloé avait reçu un jour comme cadeau des figurines représentant les animaux de la ferme. Parfois, on peut la trouver entrain de jouer avec dans sa chambre. Ce jour-là, Héléna assiste à la scène suivante : Alexandre découvre sous un tas de jouets la figurine d\'un cochon et la présente devant le nez de Chloé en riant très fort. "Ca, c\'est toi, Ha, Ha, Ha …".\n\nChloé, sans se démonter, recherche dans ses jouets une figurine et tout d\'un coup lui présente sous le nez la figurine d\'un âne. Elle lui répond aussitôt : "et ça, c\'est toi maintenant !".'
+            },
+            {
+                id: 20,
+                character: 'alexander',
+                title: 'La semaine des quatre jeudis',
+				image: 'images/famille_53.png', // Ajoutez le chemin
+                preview: 'Une discussion futée entre Alexandre et Chloé sur le prêt de jouets...',
+                content: 'Discussion entre Alexandre et Chloé.\n\n"Chloé, je te prêterai ce jouet la semaine des quatre jeudis".\n\n"Mais, Alexandre, voyons, ça n\'existe pas la semaine où il y a quatre jeudis".\n\n"Je le sais. C\'est justement pour cela que je ne te le prêterai pas".'
+            },
+            {
+                id: 21,
+                character: 'alexander',
+                title: 'L\'amour de soi',
+				image: 'images/famille_21.png', // Ajoutez le chemin
+                preview: 'Alexandre confesse son amour pour lui-même à sa maman...',
+                content: 'Discussion entre Alexandre et sa maman.\n\n"Alexandre, tu es vraiment adorable."\n\n"Je le sais Maman, moi aussi je m\'adore tellement."'
+            },
+            {
+                id: 22,
+                character: 'alexander',
+                title: 'Le jeune garçon trop lent à la piscine',
+				image: 'images/famille_54.png', // Ajoutez le chemin
+                preview: 'À la piscine, Alexandre veut impressionner ses parents...',
+                content: 'A la piscine de Pernes-les-Fontaines durant les vacances, Alexandre s\'en donne à cœur joie pour apprendre à nager et, à chaque progrès, il lance : "Papa, Maman, regardez ce que je sais faire maintenant."\n\nUne fois même, je l\'ai arrêté dans son élan lorsqu\'un jeune garçon est passé par la zone où il voulait me faire sa démonstration. "Tu attendras qu\'il passe pour me montrer".\n\nS\'impatientant face à la lenteur que mettait le garçon pour se déplacer, il lui lance : "Hé, p\'tit gars. Tu pourrais bouger d\'ici vite fait ?!" Et aussitôt, Alexandre se précipite vers le garçon les poings en avant et avec autorité. Aussitôt, je cherche à l\'arrêter et Alexandre de me rétorquer : "T\'en fait pas Papa ! Il m\'a donné un coup de pied sous l\'eau et je lui ai fait payer son coup !"'
+            },
+            {
+                id: 23,
+                character: 'chloe',
+                title: 'Seul au monde avec un ordinateur',
+				image: 'images/famille_63.png', // Ajoutez le chemin
+                preview: 'Chloé joue avec les paroles d\'une chanson pendant qu\'Alexandre joue...',
+                content: 'Assise à côté de son frère pendant qu\'il lui explique le fonctionnement du jeu vidéo "persian wars", Chloé se laisse aller à écouter la chanson "seul au monde" de Corneille que je diffuse à travers les enceintes de mon PC.\n\n"Ben non, on n\'est pas seul au monde, n\'est-ce pas Alexandre ?"\n\nAlexandre, pris dans le jeu, ne répond pas.\n\n"En tout cas, Alexandre n\'est pas seul au monde car il a son ordinateur" ajoute-t-elle en riant de son jeu de mot.'
+            },
+            {
+                id: 24,
+                character: 'alexander',
+                title: 'Le compliment sur le pop corn',
+				image: 'images/famille_25.png', // Ajoutez le chemin
+                preview: 'Alexandre félicite Nadia pour ses talents culinaires...',
+                content: 'Lors du séjour de Malik et de Nadia, Alexandre était tout le temps en quête du mot pour plaisanter. Un jour que Nadia a préparé du pop corn, Alexandre, après avoir fini son bol, lui affirme :\n\n"Malik n\'a pas eu tord de t\'épouser".\n\n"Ah oui et pourquoi selon toi ?"\n\n"Ben parce que tu sais bien faire les pop corns"'
+            },
+            {
+                id: 25,
+                character: 'chloe',
+                title: 'L\'excuse de la maladie',
+				image: 'images/famille_41.png', // Ajoutez le chemin
+                preview: 'Chloé trouve une excuse creative pour ne pas faire ses leçons...',
+                content: '"Chloé a tendance à ne plus vouloir faire ses leçons en rentrant à la maison. C\'est toujours en insistant qu\'elle les fait. Auriez-vous une idée de ce comportement ?"\n\nLa maîtresse de Chloé : "Et bien, Chloé ? Pourquoi tu ne veux pas faire tes leçons".\n\nSans se démonter le moins du monde et avec un culot à faire tomber parterre, Chloé répond :\n\n"J\'étais malade. C\'est pour ça que je ne pouvais pas les faire."\n\n"Bon alors, elle est là la réponse. Chloé ne se sentait pas bien." Reprend sa maîtresse en s\'adressant à moi.\n\n"Tiens, tiens. Le problème, c\'est qu\'elle n\'était pas malade."\n\nChloé, toujours souriante et comme si de rien n\'était, s\'approche de moi et me dit entre ses dents : "Grrr … n\'ajoute plus rien."'
+            },
+            {
+                id: 26,
+                character: 'alexander',
+                title: 'On peut compter sur moi, Papa',
+				image: 'images/famille_51.png', // Ajoutez le chemin
+                preview: 'Alexandre rappelle à son papa qu\'il peut compter sur lui...',
+                content: '"Papa, tu comptais sur Héléna pour faire la vaisselle ?" me dit Alexandre.\n\n"Oui. Enfin, je ne sais pas. Pourquoi ?"\n\n"C\'est parce qu\'elle est entrain de dormir en ce moment".\n\n"Tu sais, Alexandre, j\'ai appris à ne compter que sur moi-même, … et sur ta maman aussi."\n\nUn silence se fait et Alexandre ajoute :\n\n"Et sur moi, Papa, tu peux compter aussi."\n\n"Et sur toi aussi, je peux compter mon tus, merci de me le rappeler."'
+            },
+            {
+                id: 27,
+                character: 'chloe',
+                title: 'La caricature à la poubelle',
+				image: 'images/famille_30.png', // Ajoutez le chemin
+                preview: 'Héléna fait une caricature de Chloé qui ne plaît pas du tout...',
+                content: 'Héléna entrain de faire la caricature de sa petite sœur :\n\n- Chloé, regarde le dessin que j\'ai fait de toi.\n\n- Ce n\'est pas moi ! D\'ailleurs, je ne fais pas cette tête là.\n\n- Si, c\'est bien toi. Tu peux aller voir Alexandre et lui demander si tu fais bien cette tête-là.\n\nChloé lui prend alors le dessin et se dirige, non pas vers la salle à manger où se trouve son frère mais … vers la poubelle pour l\'y jeter.'
+            },
+            {
+                id: 28,
+                character: 'alexander',
+                title: 'Un cœur sensible sous l\'apparence forte',
+				image: 'images/famille_26.png', // Ajoutez le chemin
+                preview: 'Alexandre confie un secret à son papa sur sa véritable nature...',
+                content: 'Alexandre sur le ton de la confidence : tu sais papa, même si je montre à l\'extérieur que je suis fort, au fond de moi, j\'ai un cœur sensible.'
+            },
+            {
+                id: 29,
+                character: 'alexander',
+                title: 'Les jouets de Chloé sans intérêt',
+				image: 'images/famille_23.png', // Ajoutez le chemin
+                preview: 'Une réponse amusante d\'Alexandre sur pourquoi il ne vole pas les jouets de sa sœur...',
+                content: 'Tu sais Alexandre, quand j\'étais petit, je n\'hésitais pas à emprunter des jouets qui n\'étaient pas à moi et ça, c\'est courant entre frères et sœurs. Toi, par exemple, tu dois faire la même chose avec ta petite sœur ?\n\nNon papa. Moi, je n\'ai jamais fait ça.\n\nEt bien, tu es le grand frère parfait. On ne peut pas espérer mieux.\n\nNon papa. C\'est simplement que chez elle, il n\'y a aucun jouet qui m\'intéresse (départ dans un grand éclat de rire).'
+            },
+            {
+                id: 30,
+                character: 'chloe',
+                title: 'Le rêve du vol de cuillère',
+				image: 'images/famille_62.png', // Ajoutez le chemin
+                preview: 'Chloé parle en dormant à Voiron et réclame sa cuillère...',
+                content: 'Chloé durant son sommeil, à l\'appartement de Voiron : Alexandre, rends moi ma cuillère ! …'
+            },
+            {
+                id: 31,
+                character: 'chloe',
+                title: 'La première course à la boulangerie',
+				image: 'images/famille_44.png', // Ajoutez le chemin
+                preview: 'Chloé va chercher du pain toute seule à la boulangerie pour la première fois...',
+                content: 'A Rives : Chloé insiste depuis quelques jours pour aller chercher du pain à la boulangerie. Après mûre réflexion, le grand jour est arrivé, non sans avoir fait les recommandations d\'usage quant à la sécurité et sur ce qu\'il faut demander. Fièrement, Chloé, après s\'être habillé, nous avoir embrassé, se dirige vers la sortie et nous dit au revoir.\n\nFiévreusement, Malika et moi, nous la regardons partir et montons au premier étage pour la surveiller … jusqu\'à ce qu\'elle disparaisse derrière l\'école maternelle.\n\nNous attendons alors qu\'elle revienne avec impatience.\n\nOn dirait qu\'elle a tardé … hum. Jetons un coup d\'œil.\n\nOn voit alors apparaître à l\'angle de l\'école maternelle notre petite Chloé marchant d\'un pas assuré, sereine. Malika me fait remarquer qu\'elle n\'a pas les baguettes. Tiens ? Elle s\'arrête et fait machine arrière. Que se passe-t-il ? Elle repart sur son chemin. Malika me dit alors qu\'elle a oublié le pain et qu\'elle y retourne.\n\nQuelques minutes après, Chloé frappe à la porte et apporte les deux baguettes dans la cuisine. Bravo Chloé, c\'est super. Tu y es arrivé. Comment ça s\'est passé ? Très bien papa. J\'ai demandé deux baguettes pas trop cuites et les voilà !'
+            },
+            {
+                id: 32,
+                character: 'alexander',
+                title: 'Le couscous et le taboulé',
+				image: 'images/famille_48.png', // Ajoutez le chemin
+                preview: 'Alexandre propose une solution simple à sa maman qui cherche une recette...',
+                content: 'Malika entrain de chercher la recette du taboulé dans un livre de cuisine. Alexandre lui demande : « Maman, qu\'est-ce que tu cherches comme repas ? »\n\n« Et bien, je cherche la recette du taboulé sur le livre de Cyril LIGNAC ».\n\nAlexandre après avoir fait une petite moue décide de répondre : « Maman ! C\'est pas la peine, laisse le couscous tranquille ».'
+            },
+            {
+                id: 33,
+                character: 'alexander',
+                title: 'Les boulettes du soir au midi',
+				image: 'images/famille_63.png', // Ajoutez le chemin
+                preview: 'Alexandre refuse les boulettes de semoule au déjeuner de midi...',
+                content: 'Malika décide ce jour-là de préparer des boulettes de semoule pour le déjeuner. Une fois prêt, le repas est servi et Alexandre ne tarde pas à arriver du collège pour déjeuner à la maison. Maman ! Qu\'est-ce que tu as préparé ? Taasvant, c\'est un repas du soir. On ne le mange pas à midi. Je t\'en prie, prépare-moi autre chose.\n\nUne demi heure plus tard, c\'est au tour de Chloé de rentrer. Qu\'est-ce qu\'il y a à manger à midi ?\n\nEt bien, ta maman a préparé un repas des dieux, digne de l\'Olympe. Il s\'agit de boulettes de semoules.\n\nComment, des boulettes de semoule ? Mais, c\'est un repas du soir ! Moi, je mange autre chose.'
+            },
+            {
+                id: 34,
+                character: 'helena',
+                title: 'Le repas brûlé et Warcraft',
+				image: 'images/famille_57.png', // Ajoutez le chemin
+                preview: 'Héléna oublie le repas sur le feu en jouant à Warcraft...',
+                content: 'Héléna ! Ton papa a un conseil de classe ce soir et il ne rentrera pas avant 20 H. Pour ma part, j\'ai une réunion de travail à 19 H et je dois partir tout de suite. Je te laisse le repas. Attention ! Il n\'est pas encore parfaitement cuit et a besoin de 30 minutes supplémentaires. Tu le surveilleras et l\'éteindra à 19H20. Tu pourras alors servir le repas et vous mangerez tous avant l\'arrivée de votre papa.\n\n« Oui Maman, je n\'oublie pas. »\n\nAvant de s\'en aller, Malika répète : « Tu n\'oublies pas Héléna, le repas est sur le feu et tu l\'éteins à 19H20. »\n\nDe son travail, Malika n\'est pas complètement rassurée et appelle à la maison : « Héléna, tu n\'oublie pas d\'éteindre le repas dès qu\'il est cuit. »\n\n« Maman, tu sais que tu es lourde parfois avec ton insistance. Tu me fais confiance ou pas ? »\n\nMalika a oublié que lorsque Héléna est plongée dans une partie de Warcraft sur ordinateur, rien n\'existe autour d\'elle. Elle n\'a éteint la marmite que lorsque l\'odeur de brûlé lui est parvenue. Ce soir-là, personne n\'a mangé son repas.'
+            },
+            {
+                id: 35,
+                character: 'alexander',
+                title: 'Leçon de technologie pour Maman',
+				image: 'images/famille_64.png', // Ajoutez le chemin
+                preview: 'Alexandre explique à sa maman comment utiliser le lecteur divx...',
+                content: 'Alexandre, depuis ce matin je n\'arrive pas à mettre mon programme sur le lecteur divx. Pourrais-tu me montrer comment utiliser sa télécommande ?\n\nOui maman. Tu prends d\'abord la télécommande de la télé pour appuyer 2 fois sur la touche AV, puis la télécommande du lecteur divx pour appuyer ici, puis appuyer là et encore là et la tour est joué.\n\nMerci Alexandre, j\'ai compris, tu peux me laisser regarder maintenant mon programme.\n\nNon, maman. J\'éteins tout et tu recommences depuis le début pour voir si tu as vraiment compris.'
+            },
+            {
+                id: 36,
+                character: 'chloe',
+                title: 'L\'âge pour avoir les clés',
+				image: 'images/famille_46.png', // Ajoutez le chemin
+                preview: 'Chloé négocie l\'âge auquel elle aura son trousseau de clés...',
+                content: 'Chloé réclame depuis quelque temps de partir à l\'école toute seule. Tu sais Chloé, il te faut à toi aussi un trousseau de clés.\n\nJe veux moi aussi mon trousseau !\n\nHéléna n\'a eu son trousseau que lorsqu\'elle a été au collège.\n\nAlexandre n\'a eu son trousseau que lorsqu\'il a été au … collège et\n\nChloé n\'aura son trousseau de clés que lorsqu\'elle sera au …\n\nAussitôt, Chloé, avec un sourire malicieux, rétorque : … au CE2. Donc, c\'est d\'accord, j\'ai mon trousseau.'
+            },
+            {
+                id: 37,
+                character: 'chloe',
+                title: 'L\'auto-portrait flatteur',
+				image: 'images/famille_55.png', // Ajoutez le chemin
+                preview: 'Chloé dessine ses meilleures amies et réserve les meilleurs qualités pour elle...',
+                content: 'Aujourd\'hui, je découvre dans le petit sac que Chloé a emmené au petit parc à côté de chez nous, une feuille de papier repliée dans laquelle figure une bande dessinée. Voilà ce qu\'elle dit :\n\nPremière vignette : une petite fille est représentée. Commentaire suivant : elle, c\'est Maélia, la plus sympa de toutes mes copines.\n\nDeuxième vignette : une autre fille est représentée. Commentaire : elle, c\'est Sophia, la plus intelligente de mes copines.\n\nTroisième vignette : encore une autre fille qui est représentée. Commentaire : elle, c\'est Océane, la plus belle de mes copines.\n\nQuatrième vignette : une fille est représentée. Commentaire : là, c\'est moi, Chloé, la fille la plus sympa, la plus intelligente et la plus belle.'
+            },
+            {
+                id: 38,
+                character: 'alexander',
+                title: 'La présentation pour la VAE',
+				image: 'images/famille_59.png', // Ajoutez le chemin
+                preview: 'Alexandre suggère une introduction pour la VAE de sa maman...',
+                content: 'Alexandre s\'intéresse à l\'entraînement à l\'oral de sa maman pour la VAE d\'auxiliaire de puériculture.\n\nMaman, il faut que tu te présentes comme ça : « Mesdames les membres du jury, je m\'appelle Malika CHELOUAH, j\'ai 48 ans et j\'ai 3 merveilleux enfants, surtout le deuxième … »'
+            },
+            {
+                id: 39,
+                character: 'chloe',
+                title: 'Changer de classe ? Pas question !',
+				image: 'images/famille_58.png', // Ajoutez le chemin
+                preview: 'Chloé refuse de changer de classe même si d\'autres élèves la perturbent...',
+                content: 'Discussion avec Chloé : « Tu me dis qu\'il y a de nombreux élèves qui perturbent ta classe et qui empêchent tout le monde de travailler ? ». Elle me répond alors par l\'affirmative. Je lui ajoute : « Tu ne verrais par conséquent pas d\'inconvénient à ce que je te change de classe pour te permettre d\'avoir de meilleures conditions ? ». « Si. Pourquoi ce serait moi qui devrait partir alors que ce sont les autres qui perturbent ? ».'
+            }
+        ];
+
+        // ===== GESTION DES HISTOIRES =====
+        // Fonction pour initialiser le site
+        function initSite() {
+            displayStories('all');
+            setupEventListeners();
+        }
+
+        // Afficher les histoires
+        function displayStories(filter) {
+            const container = document.getElementById('stories-container');
+            container.innerHTML = '';
+
+            const filteredStories = filter === 'all' 
+                ? stories 
+                : stories.filter(story => story.character === filter);
+
+            filteredStories.forEach(story => {
+                const card = createStoryCard(story);
+                container.appendChild(card);
+            });
+        }
+
+        // Créer une carte histoire
+        function createStoryCard(story) {
+            const card = document.createElement('div');
+            card.className = `story-card fade-in ${story.character}`;
+            
+            const characterLabel = {
+                chloe: 'Chloé 💕',
+                alexander: 'Alexandre 🔵',
+                helena: 'Héléna 💚',
+                general: 'Famille'
+            };
+
+            card.innerHTML = `
+                <div class="story-number">Histoire ${story.id}</div>
+                <span class="character-tag ${story.character}">${characterLabel[story.character]}</span>
+                <h3>${story.title}</h3>
+				${story.image ? `<img src="${story.image}" alt="${story.title}" class="story-image">` : ''}				
+                <p class="story-preview">${story.preview}</p>
+                <a href="#" class="read-more" onclick="openModal(${story.id}); return false;">
+                    Lire la suite →
+                </a>
+            `;
+
+            return card;
+        }
+
+        // Ouvrir le modal
+        function openModal(storyId) {
+            const story = stories.find(s => s.id === storyId);
+            if (!story) return;
+
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+
+            const characterLabel = {
+                chloe: 'Chloé 💕',
+                alexander: 'Alexandre 🔵',
+                helena: 'Héléna 💚',
+                general: 'Famille'
+            };
+
+            modalBody.innerHTML = `
+                <h2>Histoire ${story.id} - ${story.title}</h2>
+                <span class="character-tag ${story.character}">${characterLabel[story.character]}</span>
+                <div>${story.content.split('\n').map(para => `<p>${para}</p>`).join('')}</div>
+            `;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fermer le modal
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Configuration des événements
+function setupEventListeners() {
+  // Boutons de navigation principale
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const filter = this.getAttribute('data-filter');
+
+      // Mettre à jour les sections visibles
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      if (filter === 'about') {
+        document.getElementById('about-section')?.classList.add('active');
+      } else {
+        document.getElementById('all-section')?.classList.add('active');
+        displayStories(filter === 'all' ? 'all' : filter);
+        updateFilterButtons(filter);
+      }
+
+      // Mettre à jour le bouton actif
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Boutons de filtre dans la section
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const filter = this.getAttribute('data-filter');
+      displayStories(filter);
+      updateFilterButtons(filter);
+    });
+  });
+
+  // Fermer le modal (histoires)
+  document.querySelector('.close-btn')?.addEventListener('click', closeModal);
+
+  // Fermer le modal en cliquant en dehors
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('modal');
+    if (modal && event.target === modal) closeModal();
+  });
+
+  // ===== Zoom image (lightbox) =====
+  const storiesContainer = document.getElementById('stories-container');
+  const lightbox = document.getElementById('img-lightbox');
+  const lightboxImg = document.getElementById('img-lightbox-target');
+  const lightboxClose = document.querySelector('.img-lightbox__close');
+
+  function openImageZoom(src, alt) {
+    if (!lightbox || !lightboxImg) return;
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageZoom() {
+    if (!lightbox || !lightboxImg) return;
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+    document.body.style.overflow = 'auto';
+  }
+
+  // Clic sur image => zoom (délégation, OK même après displayStories())
+  if (storiesContainer) {
+    storiesContainer.addEventListener('click', (e) => {
+      const img = e.target.closest('img.story-image');
+      if (!img) return;
+      openImageZoom(img.src, img.alt);
+    });
+  }
+
+  // Fermer le zoom
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeImageZoom();
+    });
+  }
+  lightboxClose?.addEventListener('click', closeImageZoom);
+
+  // Fermer avec Échap : modal histoire + zoom
+  window.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeModal();
+      closeImageZoom();
+    }
+  });
+}
+
+
+        // Mettre à jour les boutons de filtre
+        function updateFilterButtons(activeFilter) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-filter') === activeFilter) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Initialiser le site au chargement
+        document.addEventListener('DOMContentLoaded', initSite);
+		// ===== Zoom image (lightbox) =====
+		const storiesContainer = document.getElementById('stories-container');
+		const lightbox = document.getElementById('img-lightbox');
+		const lightboxImg = document.getElementById('img-lightbox-target');
+		const lightboxClose = document.querySelector('.img-lightbox__close');
+
+		function openImageZoom(src, alt) {
+		  if (!lightbox || !lightboxImg) return;
+		  lightboxImg.src = src;
+		  lightboxImg.alt = alt || '';
+		  lightbox.classList.add('is-open');
+		  lightbox.setAttribute('aria-hidden', 'false');
+		  document.body.style.overflow = 'hidden';
+		}
+
+		function closeImageZoom() {
+		  if (!lightbox || !lightboxImg) return;
+		  lightbox.classList.remove('is-open');
+		  lightbox.setAttribute('aria-hidden', 'true');
+		  lightboxImg.src = '';
+		  document.body.style.overflow = 'auto';
+		}
+
+		// Délégation : clic sur une story-image
+		if (storiesContainer) {
+		  storiesContainer.addEventListener('click', (e) => {
+			const img = e.target.closest('img.story-image');
+			if (!img) return;
+
+			// Empêche par exemple un clic "à travers" sur un lien voisin
+			e.preventDefault();
+
+			openImageZoom(img.src, img.alt);
+		  });
+		}
+
+		// Fermetures
+		if (lightbox) {
+		  lightbox.addEventListener('click', (e) => {
+			// Ferme si on clique sur le fond (pas sur l'image)
+			if (e.target === lightbox) closeImageZoom();
+		  });
+		}
+
+		if (lightboxClose) lightboxClose.addEventListener('click', closeImageZoom);
+
+		window.addEventListener('keydown', (e) => {
+		  if (e.key === 'Escape') closeImageZoom();
+		});
+
+    </script>
+	
+	<div id="img-lightbox" class="img-lightbox" aria-hidden="true">
+			<button class="img-lightbox__close" type="button" aria-label="Fermer">×</button>
+			<img id="img-lightbox-target" alt="">
+	</div>
+
+</body>
+</html>
