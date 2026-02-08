@@ -400,6 +400,22 @@
             backdrop-filter: blur(5px);
         }
 
+/* Le modal ne doit pas dépasser l'écran */
+#modal .modal-content{
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* La zone de contenu devient scrollable si trop longue */
+#modal-body{
+  overflow-y: auto;                 /* scrollbar si besoin [web:360] */
+  max-height: calc(85vh - 90px);    /* ajuste 90px selon ton h2/tag/marges [web:364] */
+  padding-right: 6px;              /* laisse un peu de place à l'ascenseur */
+}
+
+
+
         @keyframes slideIn {
             from {
                 transform: translateY(-50px);
@@ -967,318 +983,320 @@
 
         // Base de données des histoires
         const stories = [
-            {
-                id: 1,
-                character: 'helena',
-                title: 'La télévision interdite',
-				image: 'images/famille_62.png', // Ajoutez le chemin
-                preview: 'Chloé arrive dans la salle à manger, voit la télévision allumée et Héléna allongée sur le canapé...',
-                content: 'Chloé arrive dans la salle à manger, voit la télévision allumée et Héléna allongée sur le canapé. Aussitôt, elle se dirige vers la télévision et l\'éteint. Sa conclusion : tu es punie de télévision par papa !'
-            },
-            {
-                id: 2,
-                character: 'alexander',
-                title: 'Les calculs des bonbons',
-				image: 'images/famille_61.png', // Ajoutez le chemin
-                preview: 'Titi, assis à la table de la salle à manger, entrain de manger des calculs amusants...',
-                content: 'Titi, assis à la table de la salle à manger, entrain de manger : je lui demande s\'il veut jouer aux devinettes. Il me répond qu\'il préfèrerait plutôt les calculs.\n\nPremier calcul : Chloé t\'offre 5 bonbons et tu en manges 2. Combien t\'en reste-t-il ?\n\nCa, c\'est facile. Il m\'en reste … 3.\n\nBravo Titi c\'est bien ça.\n\nHéléna te donne 5 bonbons et ta maman t\'en ajoute 3. Toi tu en manges 5. Combien t\'en reste-t-il ?\n\nOh ! C\'est encore facile ! Il m\'en reste …. (longues minutes de réflexion)\n\nJe mets alors la minuterie. Tic Tac, Tic Tac …\n\nNon papa, arrête ! Tu m\'empêches de réfléchir.\n\nOk, vas-y, réfléchis.\n\n… (Titi entrain de réfléchir)\n\nCa y est. J\'ai trouvé ! Ca donne 3.\n\nBravo Titi. Tu as réussi à trouver ! Maintenant plus difficile ! Tu écoutes bien. Je te donne 3 bonbons et toi tu en manges 4. Combien t\'en reste-t-il ?\n\nQuelques instants de réflexion.\n\nPapa ! Me dit-il d\'un air outré. Tu m\'as fait un piège ! C\'est impossible ! …'
-            },
-            {
-                id: 3,
-                character: 'chloe',
-                title: 'Une surprise sucrée',
-				image: 'images/famille_45.png', // Ajoutez le chemin
-                preview: 'Chloé de retour des courses avec ses parents... elle a une surprise pour les enfants !',
-                content: 'Chloé de retour des courses avec son papa et sa maman. Elle a entre les mains un sachet de bonbons au chocolat qu\'elle a subtilisé dans l\'un des sacs. Elle se précipite à l\'entrée de la maison et dit d\'un air ravi :\n\nLes enfants, les enfants ! Une surprise !!!\n\nTada !'
-            },
-            {
-                id: 4,
-                character: 'chloe',
-                title: 'Les mots amusants de Chloé bébé',
-				image: 'images/famille_9.png', // Ajoutez le chemin
-                preview: 'Le langage particulier de Chloé quand elle était bébé...',
-                content: 'Il faut savoir que Chloé, étant bébé, s\'est mise à parler très tôt. A ce titre, elle avait à l\'époque un langage bien particulier.\n\nQuand elle souhaitait descendre de sa poussette, elle disait : "Coucouma" (Chloé se glissant comme une anguille vers le bas de sa poussette pour descendre).\n\nEn revanche, quand elle faisait tomber quelque chose (ce qui était, soi-dit en passant, extrêmement rare), elle disait : "il est bombé le verre" (verre entrain de tomber par inadvertance)\n\nLorsqu\'elle est gonflée par la rage de s\'être sentie offensée, elle n\'hésite pas à lancer : "Vivotte Titi" quand ce dernier a été particulièrement indélicat à son égard. Il s\'ensuit évidemment qu\'elle lui court derrière pour le mordre.'
-            },
-            {
-                id: 5,
-                character: 'alexander',
-                title: 'L\'heure du lit non négociable',
-				image: 'images/famille_41.png', // Ajoutez le chemin
-                preview: 'Chloé fait rester Alexandre à l\'écart de l\'ordinateur...',
-                content: 'Après dîner, Chloé était entrain de jouer tranquillement sur l\'ordinateur quant Titi s\'approcha d\'elle et lui demanda s\'il pouvait à son tour jouer.\n\nAussitôt, elle s\'écrie : "Non, Alexandre. Tu dois aller te mettre au lit."\n\nTiti, surpris, lui répond : "Je n\'ai pas école demain."\n\nMais Chloé reste inflexible dans son jugement !'
-            },
-            {
-                id: 6,
-                character: 'chloe',
-                title: 'Convaincue des monstres... et du Père Noël',
-				image: 'images/famille_47.png', // Ajoutez le chemin
-                preview: 'Chloé discute avec sa maman sur l\'existence des créatures fantastiques...',
-                content: 'Chloé, en discussion sérieuse avec sa maman. "Tu sais, maman, les monstres, ça n\'existe pas. Les sorcières aussi et aussi les monstres" lui dit-elle en essayant de se persuader elle-même de ses propos. Elle s\'arrête un moment et ajoute : "Mais, le père Noël, lui, il existe ! Il apporte plein de jouets pour les enfants."'
-            },
-            {
-                id: 7,
-                character: 'chloe',
-                title: 'La négociation à la librairie',
-				image: 'images/famille_50.png', // Ajoutez le chemin
-                preview: 'À MaxiLivre, Chloé échange un livre contre un autre avec stratégie...',
-                content: 'Chloé et Titi adorent se rendre à la librairie MaxiLivre qui est au Parc des expositions de Villepinte et s\'attarder au rayon pour enfants. Ce jour-là, voilà quelques propos échangés au hasard de la discussion :\n\n"Alexandre, laisse-moi regarder le livre sur halloween. Je l\'ai pas vu.".\n\n"Non, c\'est moi qui l\'ai pris et je n\'ai pas fini de le lire."\n\nLa réponse de Titi n\'était pas du tout pour lui plaire et on l\'observe à la fois dépitée et plongée dans une profonde réflexion. Tout d\'un coup, elle a une idée : elle se dirige vers un livre exposé sur l\'étalage et le tend à Titi.\n\n"Regarde Alexandre, ce que j\'ai trouvé. Un livre sur les pirates !"\n\n"Oh chouette, montre-le-moi."\n\n"Donne-moi d\'abord le livre sur halloween et après, je te le passerai !"'
-            },
-            {
-                id: 8,
-                character: 'chloe',
-                title: 'Le vol du yaourt amusant',
-				image: 'images/famille_49.png', // Ajoutez le chemin
-                preview: 'À table, Chloé subtilise le yaourt de son papa avec malice...',
-                content: 'A table, des situations parfois cocasses peuvent survenir. Un soir, au moment du dessert, Chloé me subtilise mon pot de yaourt et ma cuillère. Ayant fait mine de ne rien remarquer, elle me dit alors d\'un air espiègle :\n\n"Je t\'ai pris ton yaourt et ta cuillère !"\n\nJe la regarde interloqué et je fais mine de pleurer en lui répondant :\n\n"Je n\'ai plus de yaourt à manger ! Je suis très triste."\n\nElle se lève et vient prendre un yaourt dans le paquet, juste à côté de moi. Elle le met en face de moi et me précise : "Mais non, il reste encore des yaourts".\n\nJe lui dis alors toujours en gémissant : "Oui, mais je n\'ai rien pour le manger".\n\nElle part alors à la cuisine, en ramène une petite cuillère et me dit souverainement pour conclure : "Tiens maintenant et qu\'on n\'en parle plus !".'
-            },
-            {
-                id: 9,
-                character: 'alexander',
-                title: 'Une mauvaise odeur à la partie de cartes',
-				image: 'images/famille_17.png', // Ajoutez le chemin
-                preview: 'Chloé et Alexandre jouent aux cartes quand une odeur apparaît...',
-                content: 'Chloé et Alexandre, assis tous les deux sur le canapé, entrain de jouer aux cartes à Donjons et Dragon. On entend alors :\n\n"Alexandre, je crois que je sens une mauvaise odeur."\n\n"Respire avec la bouche, c\'est rien !"'
-            },
-            {
-                id: 10,
-                character: 'chloe',
-                title: 'L\'échange gagnant à l\'école',
-				image: 'images/famille_10.png', // Ajoutez le chemin
-                preview: 'Chloé raconte un échange spectaculaire de billes à l\'école...',
-                content: '"Je vais vous raconter une histoire très drôle qui s\'est passé à l\'école la dernière fois. Figurez-vous que j\'ai réussi à échanger une vulgaire bille "œil de chat" qui ne valait pas grand\' chose contre une bille émeraude qui est très précieuse. Devinez comment il s\'appelait celui qui me l\'a échangé ?\n\nEt bien, il s\'appelait Abdellah … comme papa !"'
-            },
-            {
-                id: 11,
-                character: 'alexander',
-                title: 'Le marron en forme de cœur',
-				image: 'images/famille_40.png', // Ajoutez le chemin
-                preview: 'Alexandre ramène un marron avec une tâche spéciale de son école...',
-                content: 'Alexandre s\'adressant à moi :\n\n"A la sortie en classe nature, je t\'ai ramené ce marron"\n\n"C\'est gentil, tu peux le poser là, sur le bureau, si tu veux bien."\n\n"Papa. Je voudrais que tu le regardes bien. Ça ne prendra pas beaucoup de temps. Qu\'est-ce que tu remarques ?"\n\n"Je ne vois pas quelque chose de particulier Alexandre"\n\n"Observe la forme de la tâche qui est dessus"\n\nJe regarde et constate : "Oui, en effet, elle a la forme d\'un cœur"\n\nEt Alexandre, avec beaucoup de sérieux et de tendresse : "C\'est pour ça que je te l\'offre à toi, mon papa, parce que je t\'aime beaucoup."'
-            },
-            {
-                id: 12,
-                character: 'chloe',
-                title: 'L\'entraide fraternelle',
-				image: 'images/famille_60.png', // Ajoutez le chemin
-                preview: 'Chloé défend le droit de son frère à l\'aider même si elle triche...',
-                content: '"Chloé. Donne-moi le nom de trois objets qui commencent par la lettre P."\n\nIl s\'ensuit alors que son frère lui souffle à tout va les réponses aux questions que je lui pose.\n\n"Alexandre, arrête d\'aider ta petite sœur. Elle doit trouver les réponses toute seul aux questions. Et toi, Chloé, arrête de tricher et réfléchis."\n\nChloé me fixe alors en se concentrant sur la réponse qu\'elle souhaite me donner :\n\n"Papa. C\'est normal qu\'Alexandre cherche à m\'aider. Nous sommes frère et sœur !"'
-            },
-            {
-                id: 13,
-                character: 'alexander',
-                title: 'La boule rebondissante pour la grande sœur',
-				image: 'images/famille_60.png', // Ajoutez le chemin
-                preview: 'Au magasin Carrefour, Alexandre demande une boule pour sa grande sœur...',
-                content: 'Au magasin Carrefour de Voiron, en compagnie d\'Alexandre, de Chloé et de leur maman, nous sommes arrêtés à proximité du rayon "boissons" par un animateur faisant des tours de magies. Il nous propose l\'offre du jour sur les jus d\'oranges et offre au passage des boules rebondissantes aux enfants. Chloé prend le cadeau et lorsque c\'est au tour d\'Alexandre, celui-ci s\'adresse alors au magicien en lui disant :\n\n"Ce serait très gentil si vous pouviez m\'ajouter une boule pour ma grande sœur qui n\'est pas venu avec nous. Je pense que cela lui fera énormément plaisir."\n\n"Je n\'en ai pas pour tout le monde, mais comme tu l\'as demandé si gentiment, en voilà une pour ta grande sœur."'
-            },
-            {
-                id: 14,
-                character: 'chloe',
-                title: 'Les préférences confuses',
-				image: 'images/famille_56.png', // Ajoutez le chemin
-                preview: 'Une petite confusion de chiffres avec Papa...',
-                content: 'Chloé, quel est le repas préféré d\'Alexandre ?\n\nC\'est facile. C\'est frites, steak, cordon bleu.\n\nEt pour Maman, quels sont ses trois films préférés ?\n\nIl y a Troie, ….\n\nEt après ?\n\nIl y a quatre !'
-            },
-            {
-                id: 15,
-                character: 'chloe',
-                title: 'Le petit déjeuner de ses souvenirs',
-				image: 'images/famille_15.png', // Ajoutez le chemin
-                preview: 'Chloé rêve du petit déjeuner qu\'elle prenait à trois ans...',
-                content: 'Alors Chloé ? Qu\'est-ce que tu veux pour ton petit déjeuner ?\n\nJe veux du café au lait avec une brioche comme quand j\'avais trois ans. (Au moment des faits, elle en a cinq).'
-            },
-            {
-                id: 16,
-                character: 'alexander',
-                title: 'Le matin précoce avec Chloé',
-				image: 'images/famille_23.png', // Ajoutez le chemin
-                preview: 'Alexandre se réveille tôt et dérange la sieste matinale de Chloé...',
-                content: 'Alexandre se réveilla exceptionnellement tôt ce matin-là. Chloé était déjà allongée sur le canapé du salon sous sa couette.\n\nAlexandre, ce n\'est pas encore l\'heure de se réveiller. Tu peux retourner dans la chambre te coucher. Je t\'appellerai lorsque ce sera l\'heure.\n\nNon, Maman. Je n\'ai plus envie de retourner dormir. Chloé. Pourrais-tu pousser tes pieds pour que je puisse m\'asseoir ?\n\nChloé (contrariée). Non Alexandre, tu fais ce que Maman t\'a dit.'
-            },
-            {
-                id: 17,
-                character: 'chloe',
-                title: 'Une princesse ne transporte rien',
-				image: 'images/famille_19.png', // Ajoutez le chemin
-                preview: 'En sortant de l\'école, Chloé se comporte comme une véritable princesse...',
-                content: 'En allant chercher Chloé à son école maternelle, elle m\'accueille avec une énorme pochette contenant ses dessins. Je transporte la pochette jusqu\'à la voiture en taquinant la clochette sur la grande quantité de combustible qu\'elle ramène pour la cheminée.\n\nAprès avoir récupéré son frère et stationné en face de chez nous, je constate qu\'elle reste dans la voiture sans bouger. Je lui ouvre la porte et lui indique qu\'elle se comporte comme une princesse. Elle sort et je lui ajoute en sortant sa pochette du coffre qu\'il est temps maintenant qu\'elle s\'en occupe. Sans broncher, elle me regarde et me répond : "une princesse ne transporte rien".'
-            },
-            {
-                id: 18,
-                character: 'chloe',
-                title: 'L\'interdiction de courir dans les escaliers',
-				image: 'images/famille_20.png', // Ajoutez le chemin
-                preview: 'Au stade, Chloé rappelle les règles de sécurité à Alexandre...',
-                content: 'Après une matinée sportive au stade en compagnie d\'Alexandre, Chloé et Malika, nous voilà en bas de l\'escalier et à côté de l\'ascenseur. Lequel prendre ?\n\nMalika nous oriente alors vers l\'escalier pour continuer sur la lignée sportive. Voyant l\'hésitation d\'Alexandre, je lance alors que le dernier arrivé sera un poisson pourri. La clochette s\'engage alors vivement dans la montée des escaliers prenant ainsi de l\'avance sur son frère. Au deuxième étage, Alexandre tente de la dépasser mais Chloé lui rappelle qu\'il est interdit de courir dans les escaliers. Se moquant parfaitement de ce détail, Alexandre la double et à ce moment Chloé l\'attrape d\'une main sur l\'épaule et le bloque dans sa course, le faisant presque tomber. Malika lui dit que ce n\'est pas bien de le retenir dans les escaliers et qu\'elle a failli lui faire mal.\n\nSans se démonter, alors qu\'elle reçoit des coups d\'Alexandre qui n\'était pas content du tout du tour qu\'elle lui a joué, elle répond qu\'il est interdit de courir dans les escaliers et qu\'Alexandre n\'écoute jamais ce qu\'on lui dit.'
-            },
-            {
-                id: 19,
-                character: 'alexander',
-                title: 'L\'insulte des figurines',
-				image: 'images/famille_29.png', // Ajoutez le chemin
-                preview: 'Alexandre se moque de Chloé avec une figurine de cochon...',
-                content: 'Chloé avait reçu un jour comme cadeau des figurines représentant les animaux de la ferme. Parfois, on peut la trouver entrain de jouer avec dans sa chambre. Ce jour-là, Héléna assiste à la scène suivante : Alexandre découvre sous un tas de jouets la figurine d\'un cochon et la présente devant le nez de Chloé en riant très fort. "Ca, c\'est toi, Ha, Ha, Ha …".\n\nChloé, sans se démonter, recherche dans ses jouets une figurine et tout d\'un coup lui présente sous le nez la figurine d\'un âne. Elle lui répond aussitôt : "et ça, c\'est toi maintenant !".'
-            },
-            {
-                id: 20,
-                character: 'alexander',
-                title: 'La semaine des quatre jeudis',
-				image: 'images/famille_53.png', // Ajoutez le chemin
-                preview: 'Une discussion futée entre Alexandre et Chloé sur le prêt de jouets...',
-                content: 'Discussion entre Alexandre et Chloé.\n\n"Chloé, je te prêterai ce jouet la semaine des quatre jeudis".\n\n"Mais, Alexandre, voyons, ça n\'existe pas la semaine où il y a quatre jeudis".\n\n"Je le sais. C\'est justement pour cela que je ne te le prêterai pas".'
-            },
-            {
-                id: 21,
-                character: 'alexander',
-                title: 'L\'amour de soi',
-				image: 'images/famille_21.png', // Ajoutez le chemin
-                preview: 'Alexandre confesse son amour pour lui-même à sa maman...',
-                content: 'Discussion entre Alexandre et sa maman.\n\n"Alexandre, tu es vraiment adorable."\n\n"Je le sais Maman, moi aussi je m\'adore tellement."'
-            },
-            {
-                id: 22,
-                character: 'alexander',
-                title: 'Le jeune garçon trop lent à la piscine',
-				image: 'images/famille_54.png', // Ajoutez le chemin
-                preview: 'À la piscine, Alexandre veut impressionner ses parents...',
-                content: 'A la piscine de Pernes-les-Fontaines durant les vacances, Alexandre s\'en donne à cœur joie pour apprendre à nager et, à chaque progrès, il lance : "Papa, Maman, regardez ce que je sais faire maintenant."\n\nUne fois même, je l\'ai arrêté dans son élan lorsqu\'un jeune garçon est passé par la zone où il voulait me faire sa démonstration. "Tu attendras qu\'il passe pour me montrer".\n\nS\'impatientant face à la lenteur que mettait le garçon pour se déplacer, il lui lance : "Hé, p\'tit gars. Tu pourrais bouger d\'ici vite fait ?!" Et aussitôt, Alexandre se précipite vers le garçon les poings en avant et avec autorité. Aussitôt, je cherche à l\'arrêter et Alexandre de me rétorquer : "T\'en fait pas Papa ! Il m\'a donné un coup de pied sous l\'eau et je lui ai fait payer son coup !"'
-            },
-            {
-                id: 23,
-                character: 'chloe',
-                title: 'Seul au monde avec un ordinateur',
-				image: 'images/famille_63.png', // Ajoutez le chemin
-                preview: 'Chloé joue avec les paroles d\'une chanson pendant qu\'Alexandre joue...',
-                content: 'Assise à côté de son frère pendant qu\'il lui explique le fonctionnement du jeu vidéo "persian wars", Chloé se laisse aller à écouter la chanson "seul au monde" de Corneille que je diffuse à travers les enceintes de mon PC.\n\n"Ben non, on n\'est pas seul au monde, n\'est-ce pas Alexandre ?"\n\nAlexandre, pris dans le jeu, ne répond pas.\n\n"En tout cas, Alexandre n\'est pas seul au monde car il a son ordinateur" ajoute-t-elle en riant de son jeu de mot.'
-            },
-            {
-                id: 24,
-                character: 'alexander',
-                title: 'Le compliment sur le pop corn',
-				image: 'images/famille_25.png', // Ajoutez le chemin
-                preview: 'Alexandre félicite Nadia pour ses talents culinaires...',
-                content: 'Lors du séjour de Malik et de Nadia, Alexandre était tout le temps en quête du mot pour plaisanter. Un jour que Nadia a préparé du pop corn, Alexandre, après avoir fini son bol, lui affirme :\n\n"Malik n\'a pas eu tord de t\'épouser".\n\n"Ah oui et pourquoi selon toi ?"\n\n"Ben parce que tu sais bien faire les pop corns"'
-            },
-            {
-                id: 25,
-                character: 'chloe',
-                title: 'L\'excuse de la maladie',
-				image: 'images/famille_41.png', // Ajoutez le chemin
-                preview: 'Chloé trouve une excuse creative pour ne pas faire ses leçons...',
-                content: '"Chloé a tendance à ne plus vouloir faire ses leçons en rentrant à la maison. C\'est toujours en insistant qu\'elle les fait. Auriez-vous une idée de ce comportement ?"\n\nLa maîtresse de Chloé : "Et bien, Chloé ? Pourquoi tu ne veux pas faire tes leçons".\n\nSans se démonter le moins du monde et avec un culot à faire tomber parterre, Chloé répond :\n\n"J\'étais malade. C\'est pour ça que je ne pouvais pas les faire."\n\n"Bon alors, elle est là la réponse. Chloé ne se sentait pas bien." Reprend sa maîtresse en s\'adressant à moi.\n\n"Tiens, tiens. Le problème, c\'est qu\'elle n\'était pas malade."\n\nChloé, toujours souriante et comme si de rien n\'était, s\'approche de moi et me dit entre ses dents : "Grrr … n\'ajoute plus rien."'
-            },
-            {
-                id: 26,
-                character: 'alexander',
-                title: 'On peut compter sur moi, Papa',
-				image: 'images/famille_51.png', // Ajoutez le chemin
-                preview: 'Alexandre rappelle à son papa qu\'il peut compter sur lui...',
-                content: '"Papa, tu comptais sur Héléna pour faire la vaisselle ?" me dit Alexandre.\n\n"Oui. Enfin, je ne sais pas. Pourquoi ?"\n\n"C\'est parce qu\'elle est entrain de dormir en ce moment".\n\n"Tu sais, Alexandre, j\'ai appris à ne compter que sur moi-même, … et sur ta maman aussi."\n\nUn silence se fait et Alexandre ajoute :\n\n"Et sur moi, Papa, tu peux compter aussi."\n\n"Et sur toi aussi, je peux compter mon tus, merci de me le rappeler."'
-            },
-            {
-                id: 27,
-                character: 'chloe',
-                title: 'La caricature à la poubelle',
-				image: 'images/famille_30.png', // Ajoutez le chemin
-                preview: 'Héléna fait une caricature de Chloé qui ne plaît pas du tout...',
-                content: 'Héléna entrain de faire la caricature de sa petite sœur :\n\n- Chloé, regarde le dessin que j\'ai fait de toi.\n\n- Ce n\'est pas moi ! D\'ailleurs, je ne fais pas cette tête là.\n\n- Si, c\'est bien toi. Tu peux aller voir Alexandre et lui demander si tu fais bien cette tête-là.\n\nChloé lui prend alors le dessin et se dirige, non pas vers la salle à manger où se trouve son frère mais … vers la poubelle pour l\'y jeter.'
-            },
-            {
-                id: 28,
-                character: 'alexander',
-                title: 'Un cœur sensible sous l\'apparence forte',
-				image: 'images/famille_26.png', // Ajoutez le chemin
-                preview: 'Alexandre confie un secret à son papa sur sa véritable nature...',
-                content: 'Alexandre sur le ton de la confidence : tu sais papa, même si je montre à l\'extérieur que je suis fort, au fond de moi, j\'ai un cœur sensible.'
-            },
-            {
-                id: 29,
-                character: 'alexander',
-                title: 'Les jouets de Chloé sans intérêt',
-				image: 'images/famille_23.png', // Ajoutez le chemin
-                preview: 'Une réponse amusante d\'Alexandre sur pourquoi il ne vole pas les jouets de sa sœur...',
-                content: 'Tu sais Alexandre, quand j\'étais petit, je n\'hésitais pas à emprunter des jouets qui n\'étaient pas à moi et ça, c\'est courant entre frères et sœurs. Toi, par exemple, tu dois faire la même chose avec ta petite sœur ?\n\nNon papa. Moi, je n\'ai jamais fait ça.\n\nEt bien, tu es le grand frère parfait. On ne peut pas espérer mieux.\n\nNon papa. C\'est simplement que chez elle, il n\'y a aucun jouet qui m\'intéresse (départ dans un grand éclat de rire).'
-            },
-            {
-                id: 30,
-                character: 'chloe',
-                title: 'Le rêve du vol de cuillère',
-				image: 'images/famille_62.png', // Ajoutez le chemin
-                preview: 'Chloé parle en dormant à Voiron et réclame sa cuillère...',
-                content: 'Chloé durant son sommeil, à l\'appartement de Voiron : Alexandre, rends moi ma cuillère ! …'
-            },
-            {
-                id: 31,
-                character: 'chloe',
-                title: 'La première course à la boulangerie',
-				image: 'images/famille_44.png', // Ajoutez le chemin
-                preview: 'Chloé va chercher du pain toute seule à la boulangerie pour la première fois...',
-                content: 'A Rives : Chloé insiste depuis quelques jours pour aller chercher du pain à la boulangerie. Après mûre réflexion, le grand jour est arrivé, non sans avoir fait les recommandations d\'usage quant à la sécurité et sur ce qu\'il faut demander. Fièrement, Chloé, après s\'être habillé, nous avoir embrassé, se dirige vers la sortie et nous dit au revoir.\n\nFiévreusement, Malika et moi, nous la regardons partir et montons au premier étage pour la surveiller … jusqu\'à ce qu\'elle disparaisse derrière l\'école maternelle.\n\nNous attendons alors qu\'elle revienne avec impatience.\n\nOn dirait qu\'elle a tardé … hum. Jetons un coup d\'œil.\n\nOn voit alors apparaître à l\'angle de l\'école maternelle notre petite Chloé marchant d\'un pas assuré, sereine. Malika me fait remarquer qu\'elle n\'a pas les baguettes. Tiens ? Elle s\'arrête et fait machine arrière. Que se passe-t-il ? Elle repart sur son chemin. Malika me dit alors qu\'elle a oublié le pain et qu\'elle y retourne.\n\nQuelques minutes après, Chloé frappe à la porte et apporte les deux baguettes dans la cuisine. Bravo Chloé, c\'est super. Tu y es arrivé. Comment ça s\'est passé ? Très bien papa. J\'ai demandé deux baguettes pas trop cuites et les voilà !'
-            },
-            {
-                id: 32,
-                character: 'alexander',
-                title: 'Le couscous et le taboulé',
-				image: 'images/famille_48.png', // Ajoutez le chemin
-                preview: 'Alexandre propose une solution simple à sa maman qui cherche une recette...',
-                content: 'Malika entrain de chercher la recette du taboulé dans un livre de cuisine. Alexandre lui demande : « Maman, qu\'est-ce que tu cherches comme repas ? »\n\n« Et bien, je cherche la recette du taboulé sur le livre de Cyril LIGNAC ».\n\nAlexandre après avoir fait une petite moue décide de répondre : « Maman ! C\'est pas la peine, laisse le couscous tranquille ».'
-            },
-            {
-                id: 33,
-                character: 'alexander',
-                title: 'Les boulettes du soir au midi',
-				image: 'images/famille_63.png', // Ajoutez le chemin
-                preview: 'Alexandre refuse les boulettes de semoule au déjeuner de midi...',
-                content: 'Malika décide ce jour-là de préparer des boulettes de semoule pour le déjeuner. Une fois prêt, le repas est servi et Alexandre ne tarde pas à arriver du collège pour déjeuner à la maison. Maman ! Qu\'est-ce que tu as préparé ? Taasvant, c\'est un repas du soir. On ne le mange pas à midi. Je t\'en prie, prépare-moi autre chose.\n\nUne demi heure plus tard, c\'est au tour de Chloé de rentrer. Qu\'est-ce qu\'il y a à manger à midi ?\n\nEt bien, ta maman a préparé un repas des dieux, digne de l\'Olympe. Il s\'agit de boulettes de semoules.\n\nComment, des boulettes de semoule ? Mais, c\'est un repas du soir ! Moi, je mange autre chose.'
-            },
-            {
-                id: 34,
-                character: 'helena',
-                title: 'Le repas brûlé et Warcraft',
-				image: 'images/famille_57.png', // Ajoutez le chemin
-                preview: 'Héléna oublie le repas sur le feu en jouant à Warcraft...',
-                content: 'Héléna ! Ton papa a un conseil de classe ce soir et il ne rentrera pas avant 20 H. Pour ma part, j\'ai une réunion de travail à 19 H et je dois partir tout de suite. Je te laisse le repas. Attention ! Il n\'est pas encore parfaitement cuit et a besoin de 30 minutes supplémentaires. Tu le surveilleras et l\'éteindra à 19H20. Tu pourras alors servir le repas et vous mangerez tous avant l\'arrivée de votre papa.\n\n« Oui Maman, je n\'oublie pas. »\n\nAvant de s\'en aller, Malika répète : « Tu n\'oublies pas Héléna, le repas est sur le feu et tu l\'éteins à 19H20. »\n\nDe son travail, Malika n\'est pas complètement rassurée et appelle à la maison : « Héléna, tu n\'oublie pas d\'éteindre le repas dès qu\'il est cuit. »\n\n« Maman, tu sais que tu es lourde parfois avec ton insistance. Tu me fais confiance ou pas ? »\n\nMalika a oublié que lorsque Héléna est plongée dans une partie de Warcraft sur ordinateur, rien n\'existe autour d\'elle. Elle n\'a éteint la marmite que lorsque l\'odeur de brûlé lui est parvenue. Ce soir-là, personne n\'a mangé son repas.'
-            },
-            {
-                id: 35,
-                character: 'alexander',
-                title: 'Leçon de technologie pour Maman',
-				image: 'images/famille_64.png', // Ajoutez le chemin
-                preview: 'Alexandre explique à sa maman comment utiliser le lecteur divx...',
-                content: 'Alexandre, depuis ce matin je n\'arrive pas à mettre mon programme sur le lecteur divx. Pourrais-tu me montrer comment utiliser sa télécommande ?\n\nOui maman. Tu prends d\'abord la télécommande de la télé pour appuyer 2 fois sur la touche AV, puis la télécommande du lecteur divx pour appuyer ici, puis appuyer là et encore là et la tour est joué.\n\nMerci Alexandre, j\'ai compris, tu peux me laisser regarder maintenant mon programme.\n\nNon, maman. J\'éteins tout et tu recommences depuis le début pour voir si tu as vraiment compris.'
-            },
-            {
-                id: 36,
-                character: 'chloe',
-                title: 'L\'âge pour avoir les clés',
-				image: 'images/famille_46.png', // Ajoutez le chemin
-                preview: 'Chloé négocie l\'âge auquel elle aura son trousseau de clés...',
-                content: 'Chloé réclame depuis quelque temps de partir à l\'école toute seule. Tu sais Chloé, il te faut à toi aussi un trousseau de clés.\n\nJe veux moi aussi mon trousseau !\n\nHéléna n\'a eu son trousseau que lorsqu\'elle a été au collège.\n\nAlexandre n\'a eu son trousseau que lorsqu\'il a été au … collège et\n\nChloé n\'aura son trousseau de clés que lorsqu\'elle sera au …\n\nAussitôt, Chloé, avec un sourire malicieux, rétorque : … au CE2. Donc, c\'est d\'accord, j\'ai mon trousseau.'
-            },
-            {
-                id: 37,
-                character: 'chloe',
-                title: 'L\'auto-portrait flatteur',
-				image: 'images/famille_55.png', // Ajoutez le chemin
-                preview: 'Chloé dessine ses meilleures amies et réserve les meilleurs qualités pour elle...',
-                content: 'Aujourd\'hui, je découvre dans le petit sac que Chloé a emmené au petit parc à côté de chez nous, une feuille de papier repliée dans laquelle figure une bande dessinée. Voilà ce qu\'elle dit :\n\nPremière vignette : une petite fille est représentée. Commentaire suivant : elle, c\'est Maélia, la plus sympa de toutes mes copines.\n\nDeuxième vignette : une autre fille est représentée. Commentaire : elle, c\'est Sophia, la plus intelligente de mes copines.\n\nTroisième vignette : encore une autre fille qui est représentée. Commentaire : elle, c\'est Océane, la plus belle de mes copines.\n\nQuatrième vignette : une fille est représentée. Commentaire : là, c\'est moi, Chloé, la fille la plus sympa, la plus intelligente et la plus belle.'
-            },
-            {
-                id: 38,
-                character: 'alexander',
-                title: 'La présentation pour la VAE',
-				image: 'images/famille_59.png', // Ajoutez le chemin
-                preview: 'Alexandre suggère une introduction pour la VAE de sa maman...',
-                content: 'Alexandre s\'intéresse à l\'entraînement à l\'oral de sa maman pour la VAE d\'auxiliaire de puériculture.\n\nMaman, il faut que tu te présentes comme ça : « Mesdames les membres du jury, je m\'appelle Malika CHELOUAH, j\'ai 48 ans et j\'ai 3 merveilleux enfants, surtout le deuxième … »'
-            },
-            {
-                id: 39,
-                character: 'chloe',
-                title: 'Changer de classe ? Pas question !',
-				image: 'images/famille_58.png', // Ajoutez le chemin
-                preview: 'Chloé refuse de changer de classe même si d\'autres élèves la perturbent...',
-                content: 'Discussion avec Chloé : « Tu me dis qu\'il y a de nombreux élèves qui perturbent ta classe et qui empêchent tout le monde de travailler ? ». Elle me répond alors par l\'affirmative. Je lui ajoute : « Tu ne verrais par conséquent pas d\'inconvénient à ce que je te change de classe pour te permettre d\'avoir de meilleures conditions ? ». « Si. Pourquoi ce serait moi qui devrait partir alors que ce sont les autres qui perturbent ? ».'
-            }
+		{
+			id: 1,
+			character: 'helena',
+			title: 'La télévision interdite',
+			image: 'images/famille_62.png',
+			preview: 'Chloé arrive dans la salle à manger, voit la télévision allumée et Héléna allongée sur le canapé...',
+			content: 'Chloé arrive dans la salle à manger et voit la télévision allumée, tandis qu’Héléna est allongée sur le canapé. Aussitôt, elle marche vers la télé et l’éteint d’un geste décidé.\n\n— Tu es punie de télévision par Papa !'
+		},
+		{
+			id: 2,
+			character: 'alexander',
+			title: 'Les calculs des bonbons',
+			image: 'images/famille_61.png',
+			preview: 'Titi, assis à la table de la salle à manger, entrain de manger des calculs amusants...',
+			content: 'Titi est assis à la table de la salle à manger, en train de manger. Je lui demande s’il veut jouer aux devinettes.\n\n— Non, Papa. Je préfère faire des calculs.\n\nPremier calcul :\n— Chloé t’offre 5 bonbons et tu en manges 2. Combien t’en reste‑t‑il ?\n— Ça, c’est facile : il m’en reste 3.\n— Bravo Titi, c’est bien ça.\n\nDeuxième calcul :\n— Héléna te donne 5 bonbons et Maman t’en ajoute 3. Toi, tu en manges 5. Combien t’en reste‑t‑il ?\n— Oh, c’est encore facile ! Il m’en reste…\n(Longues minutes de réflexion.)\n\nJe mets la minuterie en marche.\nTic tac… tic tac…\n\n— Non Papa, arrête ! Tu m’empêches de réfléchir.\n— D’accord, vas‑y, réfléchis.\n\nQuelques instants passent.\n— Ça y est, j’ai trouvé ! Ça fait 3.\n— Bravo Titi, tu as réussi !\n\nTroisième calcul :\n— Je te donne 3 bonbons et tu en manges 4. Combien t’en reste‑t‑il ?\n\nIl réfléchit, puis me regarde, outré :\n— Papa ! Tu m’as fait un piège ! C’est impossible !'
+		},
+		{
+			id: 3,
+			character: 'chloe',
+			title: 'Une surprise sucrée',
+			image: 'images/famille_45.png',
+			preview: 'Chloé de retour des courses avec ses parents... elle a une surprise pour les enfants !',
+			content: 'Chloé revient des courses avec son papa et sa maman. Elle a subtilisé un sachet de bonbons au chocolat dans l’un des sacs. Arrivée à l’entrée de la maison, elle s’exclame, ravie :\n\n— Les enfants, les enfants ! Une surprise !!!\n\n— Tadaaa !'
+		},
+		{
+			id: 4,
+			character: 'chloe',
+			title: 'Les mots amusants de Chloé bébé',
+			image: 'images/famille_9.png',
+			preview: 'Le langage particulier de Chloé quand elle était bébé...',
+			content: 'Quand elle était bébé, Chloé s’est mise à parler très tôt. Elle avait alors un langage bien à elle.\n\nQuand elle voulait descendre de sa poussette, elle disait :\n— Coucouma !\n(En se glissant comme une anguille pour en sortir.)\n\nQuand elle faisait tomber quelque chose — ce qui était très rare — elle disait :\n— Il est bombé, le verre !\n\nEt lorsqu’elle se sentait offensée, gonflée par la colère, elle lançait :\n— Vivotte, Titi !\nPuis elle lui courait après pour essayer de le mordre.'
+		},
+		{
+			id: 5,
+			character: 'alexander',
+			title: 'L’heure du lit non négociable',
+			image: 'images/famille_41.png',
+			preview: 'Chloé fait rester Alexandre à l\'écart de l\'ordinateur...',
+			content: 'Après le dîner, Chloé joue tranquillement sur l’ordinateur. Alexandre s’approche :\n\n— Chloé, je peux jouer après toi ?\n\nElle se retourne aussitôt :\n— Non, Alexandre. Tu dois aller te mettre au lit.\n\n— Mais… je n’ai pas école demain.\n\nChloé reste inflexible, sûre de son jugement.'
+		},
+		{
+			id: 6,
+			character: 'chloe',
+			title: 'Convaincue des monstres... et du Père Noël',
+			image: 'images/famille_47.png',
+			preview: 'Chloé discute avec sa maman sur l\'existence des créatures fantastiques...',
+			content: 'Chloé discute sérieusement avec sa maman.\n— Tu sais, maman… les monstres, ça n’existe pas. Les sorcières non plus… et les monstres aussi.\nElle marque une pause, comme pour se rassurer elle‑même.\n— Mais le Père Noël, lui, il existe ! Il apporte plein de jouets pour les enfants.'
+		},
+		{
+			id: 7,
+			character: 'chloe',
+			title: 'La négociation à la librairie',
+			image: 'images/famille_50.png',
+			preview: 'À MaxiLivre, Chloé échange un livre contre un autre avec stratégie...',
+			content: 'Chloé et Alexandre adorent aller à la librairie MaxiLivre du Parc des expositions de Villepinte. Ce jour‑là, ils feuillettent des livres au rayon enfants.\n\n— Alexandre, laisse‑moi regarder le livre sur Halloween. Je l’ai pas vu.\n— Non, c’est moi qui l’ai pris, et j’ai pas fini de le lire.\n\nChloé n’apprécie pas du tout cette réponse. Elle réfléchit intensément… puis a une idée. Elle attrape un livre sur les pirates et le tend à son frère.\n\n— Regarde Alexandre, ce que j’ai trouvé : un livre sur les pirates !\n— Oh chouette, montre‑le‑moi !\n— Donne‑moi d’abord le livre sur Halloween… et après, je te le passerai.'
+		},
+		{
+			id: 8,
+			character: 'chloe',
+			title: 'Le vol du yaourt amusant',
+			image: 'images/famille_49.png',
+			preview: 'À table, Chloé subtilise le yaourt de son papa avec malice...',
+			content: 'À table, au moment du dessert, Chloé me subtilise mon pot de yaourt et ma cuillère. Elle me regarde avec un air espiègle.\n\n— Je t’ai pris ton yaourt et ta cuillère !\n\nJe fais semblant d’être désespéré.\n— Oh non… je n’ai plus de yaourt à manger. Je suis très triste…\n\nElle se lève, prend un yaourt dans le paquet et le pose devant moi.\n— Mais non, il en reste encore.\n\nJe continue à gémir.\n— Oui, mais je n’ai rien pour le manger…\n\nElle part alors dans la cuisine, revient avec une petite cuillère et conclut, très sérieusement :\n— Tiens. Maintenant, qu’on n’en parle plus.'
+		},
+		{
+			id: 9,
+			character: 'alexander',
+			title: 'Une mauvaise odeur à la partie de cartes',
+			image: 'images/famille_17.png',
+			preview: 'Chloé et Alexandre jouent aux cartes quand une odeur apparaît...',
+			content: 'Chloé et Alexandre jouent aux cartes sur le canapé.\n\n— Alexandre, je crois que je sens une mauvaise odeur…\n— Respire avec la bouche, c’est rien !'
+		},
+		{
+			id: 10,
+			character: 'chloe',
+			title: 'L’échange gagnant à l’école',
+			image: 'images/famille_10.png',
+			preview: 'Chloé raconte un échange spectaculaire de billes à l\'école...',
+			content: 'Chloé raconte fièrement :\n— Je vais vous raconter une histoire très drôle qui s’est passée à l’école. J’ai réussi à échanger une bille “œil de chat”, qui valait presque rien, contre une bille émeraude très précieuse !\n\nElle sourit.\n— Devinez comment il s’appelait, celui qui me l’a échangée ?\n— Eh bien… il s’appelait Abdellah. Comme Papa !'
+		},
+		{
+			id: 11,
+			character: 'alexander',
+			title: 'Le marron en forme de cœur',
+			image: 'images/famille_40.png',
+			preview: 'Alexandre ramène un marron avec une tâche spéciale de son école...',
+			content: 'Alexandre me tend un marron en rentrant de sa sortie en classe nature.\n— À la sortie, je t’ai ramené ce marron.\n— C’est gentil, tu peux le poser sur le bureau si tu veux.\n— Papa… regarde‑le bien. Ça ne prendra pas longtemps. Qu’est‑ce que tu remarques ?\n— Je ne vois rien de particulier, Alexandre.\n— Regarde la forme de la tache dessus.\n\nJ’observe plus attentivement.\n— Ah oui… elle a la forme d’un cœur.\n\nAvec beaucoup de sérieux et de tendresse, il ajoute :\n— C’est pour ça que je te l’offre, Papa. Parce que je t’aime beaucoup.'
+		},
+		{
+			id: 12,
+			character: 'chloe',
+			title: 'L’entraide fraternelle',
+			image: 'images/famille_60.png',
+			preview: 'Chloé défend le droit de son frère à l\'aider même si elle triche...',
+			content: '— Chloé, donne‑moi trois objets qui commencent par la lettre P.\n\nAlexandre souffle discrètement toutes les réponses à sa sœur.\n\n— Alexandre, arrête d’aider ta petite sœur. Elle doit répondre toute seule. Et toi, Chloé, arrête de tricher et réfléchis.\n\nChloé me fixe, concentrée, puis répond très sérieusement :\n— Papa… c’est normal qu’Alexandre cherche à m’aider. Nous sommes frère et sœur.'
+		},
+		{
+			id: 13,
+			character: 'alexander',
+			title: 'La boule rebondissante pour la grande sœur',
+			image: 'images/famille_60.png',
+			preview: 'Au magasin Carrefour, Alexandre demande une boule pour sa grande sœur...',
+			content: 'Au Carrefour de Voiron, un animateur fait des tours de magie et offre des boules rebondissantes aux enfants. Chloé reçoit la sienne.\n\nQuand vient le tour d’Alexandre, il dit au magicien :\n— Ce serait très gentil si vous pouviez m’en donner une pour ma grande sœur qui n’est pas venue. Je suis sûr que ça lui ferait très plaisir.\n\n— Je n’en ai pas beaucoup… mais comme tu l’as demandé si gentiment, en voilà une pour ta grande sœur.'
+		},
+		{
+			id: 14,
+			character: 'chloe',
+			title: 'Les préférences confuses',
+			image: 'images/famille_56.png',
+			preview: 'Une petite confusion de chiffres avec Papa...',
+			content: '— Chloé, quel est le repas préféré d’Alexandre ?\n— Facile : frites, steak, cordon bleu.\n\n— Et pour Maman, quels sont ses trois films préférés ?\n— Il y a *Troie*…\n— Et après ?\n— Il y a quatre !'
+		},
+		{
+			id: 15,
+			character: 'chloe',
+			title: 'Le petit déjeuner de ses souvenirs',
+			image: 'images/famille_15.png',
+			preview: 'Chloé rêve du petit déjeuner qu\'elle prenait à trois ans...',
+			content: '— Alors Chloé, qu’est‑ce que tu veux pour ton petit déjeuner ?\n— Je veux du café au lait avec une brioche… comme quand j’avais trois ans.\n\n(Elle en a cinq au moment des faits.)'
+		},
+		{
+			id: 16,
+			character: 'alexander',
+			title: 'Le matin précoce avec Chloé',
+			image: 'images/famille_23.png',
+			preview: 'Alexandre se réveille tôt et dérange la sieste matinale de Chloé...',
+			content: 'Alexandre se réveille exceptionnellement tôt. Chloé est déjà allongée sur le canapé, sous sa couette.\n\n— Alexandre, ce n’est pas encore l’heure de se lever. Retourne te coucher, je t’appellerai quand ce sera le moment.\n— Non, Maman, je n’ai plus envie de dormir.\n\nIl s’approche du canapé.\n— Chloé, tu peux pousser tes pieds pour que je m’assoie ?\n\nChloé, contrariée :\n— Non, Alexandre. Tu fais ce que Maman t’a dit.'
+		},
+		{
+			id: 17,
+			character: 'chloe',
+			title: 'Une princesse ne transporte rien',
+			image: 'images/famille_19.png',
+			preview: 'En sortant de l\'école, Chloé se comporte comme une véritable princesse...',
+			content: 'En sortant de l’école maternelle, Chloé me tend une énorme pochette remplie de dessins. Je la porte jusqu’à la voiture en plaisantant sur “tout le combustible” qu’elle ramène pour la cheminée.\n\nArrivés devant la maison, elle reste assise dans la voiture. Je lui ouvre la porte :\n— Allez, princesse, il est temps de sortir.\n\nJe sors sa pochette du coffre et lui dis qu’elle doit maintenant la porter elle‑même.\n\nElle me regarde calmement et répond :\n— Une princesse ne transporte rien.'
+		},
+		{
+			id: 18,
+			character: 'chloe',
+			title: 'L’interdiction de courir dans les escaliers',
+			image: 'images/famille_20.png',
+			preview: 'Au stade, Chloé rappelle les règles de sécurité à Alexandre...',
+			content: 'Après une matinée sportive au stade, nous arrivons devant l’escalier.\n\n— Le dernier arrivé est un poisson pourri !\n\nChloé s’élance aussitôt. Alexandre tente de la dépasser au deuxième étage, mais elle lui rappelle :\n— Il est interdit de courir dans les escaliers !\n\nAlexandre l’ignore et la double. Chloé l’attrape par l’épaule pour le bloquer, manquant de le faire tomber.\n\nMalika intervient :\n— Chloé, ce n’est pas bien. Tu aurais pu lui faire mal.\n\nSous les protestations d’Alexandre, elle répond, imperturbable :\n— Il est interdit de courir dans les escaliers. Alexandre n’écoute jamais ce qu’on lui dit.'
+		},
+		{
+			id: 19,
+			character: 'alexander',
+			title: 'L’insulte des figurines',
+			image: 'images/famille_29.png',
+			preview: 'Alexandre se moque de Chloé avec une figurine de cochon...',
+			content: 'Chloé joue avec ses figurines d’animaux de la ferme. Alexandre trouve une figurine de cochon sous un tas de jouets. Il la brandit devant elle en riant :\n\n— Ça, c’est toi !\n\nChloé ne se démonte pas. Elle fouille dans ses jouets, trouve une figurine d’âne, la lui met sous le nez et répond :\n\n— Et ça, c’est toi maintenant !'
+		},
+		{
+			id: 20,
+			character: 'alexander',
+			title: 'La semaine des quatre jeudis',
+			image: 'images/famille_53.png',
+			preview: 'Une discussion futée entre Alexandre et Chloé sur le prêt de jouets...',
+			content: '— Chloé, je te prêterai ce jouet la semaine des quatre jeudis.\n\n— Mais Alexandre, ça n’existe pas une semaine avec quatre jeudis !\n\n— Je le sais. C’est pour ça que je ne te le prêterai pas.'
+		},
+
+		{
+			id: 21,
+			character: 'alexander',
+			title: 'L’amour de soi',
+			image: 'images/famille_21.png',
+			preview: 'Alexandre confesse son amour pour lui-même à sa maman...',
+			content: 'Discussion entre Alexandre et sa maman.\n\n— Alexandre, tu es vraiment adorable.\n— Je le sais, Maman. Moi aussi je m’adore tellement.'
+		},
+		{
+			id: 22,
+			character: 'alexander',
+			title: 'Le jeune garçon trop lent à la piscine',
+			image: 'images/famille_54.png',
+			preview: 'À la piscine, Alexandre veut impressionner ses parents...',
+			content: 'À la piscine de Pernes‑les‑Fontaines, Alexandre progresse et veut montrer chacune de ses nouvelles réussites.\n\n— Papa, Maman, regardez ce que je sais faire maintenant !\n\nUn jeune garçon passe justement dans la zone où il veut faire sa démonstration.\n— Tu attendras qu’il passe, Alexandre.\n\nLe garçon avance lentement. Alexandre s’impatiente.\n— Hé, p’tit gars ! Tu pourrais bouger d’ici vite fait ?!\n\nIl se précipite vers lui, les poings en avant. Je l’arrête aussitôt.\n— Alexandre, calme‑toi !\n\n— T’en fais pas, Papa ! Il m’a donné un coup de pied sous l’eau… alors je lui ai fait payer son coup !'
+		},
+		{
+			id: 23,
+			character: 'chloe',
+			title: 'Seul au monde avec un ordinateur',
+			image: 'images/famille_63.png',
+			preview: 'Chloé joue avec les paroles d\'une chanson pendant qu\'Alexandre joue...',
+			content: 'Chloé est assise à côté de son frère, qui lui explique le jeu Persian Wars. J’écoute la chanson “Seul au monde” de Corneille sur l’ordinateur.\n\n— Ben non, on n’est pas seul au monde, hein Alexandre ?\n\nAlexandre, absorbé par le jeu, ne répond pas.\n\n— En tout cas, Alexandre n’est pas seul au monde : il a son ordinateur !\n\nElle éclate de rire de son propre jeu de mots.'
+		},
+		{
+			id: 24,
+			character: 'alexander',
+			title: 'Le compliment sur le pop corn',
+			image: 'images/famille_25.png',
+			preview: 'Alexandre félicite Nadia pour ses talents culinaires...',
+			content: 'Lors du séjour de Malik et Nadia, Alexandre cherche toujours la petite phrase pour faire rire.\n\nAprès avoir fini son bol de pop‑corn préparé par Nadia, il lui dit :\n\n— Malik n’a pas eu tort de t’épouser.\n\n— Ah oui ? Et pourquoi ?\n\n— Parce que tu sais super bien faire les pop‑corns.'
+		},
+		{
+			id: 25,
+			character: 'chloe',
+			title: 'L’excuse de la maladie',
+			image: 'images/famille_41.png',
+			preview: 'Chloé trouve une excuse creative pour ne pas faire ses leçons...',
+			content: 'Inquiet de voir que Chloé refuse de faire ses leçons en rentrant à la maison, je m’adresse à sa maîtresse :\n\n— Chloé a tendance à ne plus vouloir faire ses devoirs. C’est toujours en insistant qu’elle finit par les faire. Auriez‑vous une idée de ce comportement ?\n\nLa maîtresse se tourne vers Chloé :\n— Et toi, Chloé, pourquoi tu ne veux pas faire tes leçons ?\n\nAvec un aplomb incroyable, Chloé répond :\n— J’étais malade. C’est pour ça que je ne pouvais pas les faire.\n\nLa maîtresse conclut :\n— Eh bien voilà, elle ne se sentait pas bien.\n\nJe précise calmement :\n— Le problème, c’est qu’elle n’était pas malade.\n\nChloé s’approche alors de moi, toujours souriante, et murmure entre ses dents :\n— Grrr… n’ajoute plus rien.'
+		},
+		{
+			id: 26,
+			character: 'alexander',
+			title: 'On peut compter sur moi, Papa',
+			image: 'images/famille_51.png',
+			preview: 'Alexandre rappelle à son papa qu\'il peut compter sur lui...',
+			content: '— Papa, tu comptais sur Héléna pour faire la vaisselle ?\n— Oui… enfin, je ne sais pas. Pourquoi ?\n— Parce qu’elle est en train de dormir.\n\n— Tu sais, Alexandre, j’ai appris à ne compter que sur moi‑même… et sur ta maman aussi.\n\nUn silence.\n— Et sur moi, Papa. Tu peux compter aussi sur moi.\n\n— Oui, sur toi aussi je peux compter, mon Titi. Merci de me le rappeler.'
+		},
+		{
+			id: 27,
+			character: 'chloe',
+			title: 'La caricature à la poubelle',
+			image: 'images/famille_30.png',
+			preview: 'Héléna fait une caricature de Chloé qui ne plaît pas du tout...',
+			content: 'Héléna dessine une caricature de sa petite sœur.\n\n— Chloé, regarde le dessin que j’ai fait de toi.\n— Ce n’est pas moi ! Je ne fais pas cette tête‑là.\n— Si, c’est bien toi. Va demander à Alexandre si tu fais cette tête‑là.\n\nChloé prend le dessin… mais au lieu d’aller voir son frère, elle marche droit vers la poubelle et le jette dedans.'
+		},
+		{
+			id: 28,
+			character: 'alexander',
+			title: 'Un cœur sensible sous l’apparence forte',
+			image: 'images/famille_26.png',
+			preview: 'Alexandre confie un secret à son papa sur sa véritable nature...',
+			content: 'Alexandre, sur le ton de la confidence :\n\n— Tu sais, Papa… même si je montre que je suis fort à l’extérieur, au fond de moi, j’ai le cœur sensible.'
+		},
+		{
+			id: 29,
+			character: 'alexander',
+			title: 'Les jouets de Chloé sans intérêt',
+			image: 'images/famille_23.png',
+			preview: 'Une réponse amusante d\'Alexandre sur pourquoi il ne vole pas les jouets de sa sœur...',
+			content: 'Je raconte à Alexandre :\n— Tu sais, quand j’étais petit, il m’arrivait d’emprunter les jouets de mes frères et sœurs. C’est normal entre enfants. Toi, tu ne prends jamais ceux de Chloé ?\n\nAlexandre répond calmement :\n— Non, Papa. Je n’ai jamais fait ça.\n\nJe souris :\n— Alors tu es vraiment un grand frère respectueux. Tu fais attention à ses affaires.\n\nAlexandre éclate de rire :\n— Oui… et puis, chez elle, il n’y a aucun jouet qui m’intéresse !'
+		},
+		{
+			id: 30,
+			character: 'chloe',
+			title: 'Le rêve du vol de cuillère',
+			image: 'images/famille_62.png',
+			preview: 'Chloé parle en dormant à Voiron et réclame sa cuillère...',
+			content: 'À l’appartement de Voiron, Chloé parle en dormant :\n\n— Alexandre… rends‑moi ma cuillère…'
+		},
+		{
+			id: 31,
+			character: 'chloe',
+			title: 'La première course à la boulangerie',
+			image: 'images/famille_44.png',
+			preview: 'Chloé va chercher du pain toute seule à la boulangerie pour la première fois...',
+			content: 'À Rives, Chloé insiste depuis plusieurs jours pour aller chercher du pain toute seule. Après réflexion, le grand jour arrive. Nous lui rappelons les règles de sécurité et ce qu’elle doit demander. Fière, elle s’habille, nous embrasse et part en nous disant au revoir.\n\nAvec Malika, nous montons au premier étage pour la surveiller jusqu’à ce qu’elle disparaisse derrière l’école maternelle.\n\nLe temps passe… peut‑être un peu trop.\n— Elle tarde… jetons un coup d’œil.\n\nÀ l’angle de l’école, nous la voyons réapparaître, marchant d’un pas assuré.\n— Elle n’a pas les baguettes, remarque Malika.\n\nChloé s’arrête, fait demi‑tour, puis repart.\n— Elle a dû oublier le pain, dit Malika.\n\nQuelques minutes plus tard, Chloé frappe à la porte et pose deux baguettes dans la cuisine.\n— Bravo Chloé, tu y es arrivée ! Comment ça s’est passé ?\n— Très bien, Papa. J’ai demandé deux baguettes pas trop cuites… et les voilà !'
+		},
+		{
+			id: 32,
+			character: 'alexander',
+			title: 'Le couscous et le taboulé',
+			image: 'images/famille_48.png',
+			preview: 'Alexandre propose une solution simple à sa maman qui cherche une recette...',
+			content: 'Malika cherche la recette du taboulé dans un livre de cuisine.\n\n— Maman, qu’est‑ce que tu cherches ?\n— La recette du taboulé, dans le livre de Cyril Lignac.\n\nAlexandre fait une petite moue.\n— Maman… c’est pas la peine. Laisse le couscous tranquille.'
+		},
+		{
+			id: 33,
+			character: 'alexander',
+			title: 'Les boulettes du soir au midi',
+			image: 'images/famille_63.png',
+			preview: 'Alexandre refuse les boulettes de semoule au déjeuner de midi...',
+			content: 'Malika prépare des boulettes de semoule pour le déjeuner. Alexandre rentre du collège.\n\n— Maman, qu’est‑ce que tu as préparé ?\n— Des boulettes de semoule.\n\n— Mais ça, c’est un repas du soir ! On ne mange pas ça à midi. S’il te plaît, prépare‑moi autre chose.\n\nUne demi‑heure plus tard, Chloé rentre à son tour.\n— Qu’est‑ce qu’on mange ?\n\n— Un repas des dieux, digne de l’Olympe : des boulettes de semoule.\n\n— Comment ? Des boulettes de semoule ? Mais c’est un repas du soir ! Moi, je mange autre chose.'
+		},
+		{
+			id: 34,
+			character: 'helena',
+			title: 'Le repas brûlé et Warcraft',
+			image: 'images/famille_57.png',
+			preview: 'Héléna oublie le repas sur le feu en jouant à Warcraft...',
+			content: '— Héléna ! Papa a un conseil de classe ce soir et ne rentrera pas avant 20 h. Moi, j’ai une réunion à 19 h. Je te laisse le repas. Il n’est pas encore cuit : laisse‑le encore 30 minutes et éteins à 19 h 20. Vous mangerez avant que Papa arrive.\n\n— Oui, Maman, je n’oublie pas.\n\nAvant de partir, Malika répète :\n— Tu n’oublies pas, hein ? Le repas est sur le feu.\n\n— Maman… tu es lourde parfois. Tu me fais confiance ou pas ?\n\nMais Malika oublie une chose : quand Héléna joue à Warcraft, plus rien n’existe autour d’elle.\n\nElle n’éteint la marmite que lorsque l’odeur de brûlé envahit la maison.\n\nCe soir‑là, personne n’a mangé.'
+		},
+		{
+			id: 35,
+			character: 'alexander',
+			title: 'Leçon de technologie pour Maman',
+			image: 'images/famille_64.png',
+			preview: 'Alexandre explique à sa maman comment utiliser le lecteur divx...',
+			content: '— Alexandre, depuis ce matin je n’arrive pas à mettre mon programme sur le lecteur DivX. Tu peux me montrer ?\n\n— Oui, Maman. Tu prends la télécommande de la télé, tu appuies deux fois sur AV, puis celle du lecteur, tu appuies ici, puis là… et voilà.\n\n— Merci Alexandre, j’ai compris. Je peux regarder mon programme maintenant.\n\n— Non, Maman. J’éteins tout… et tu recommences depuis le début pour voir si tu as vraiment compris.'
+		},
+		{
+			id: 36,
+			character: 'chloe',
+			title: 'L’âge pour avoir les clés',
+			image: 'images/famille_46.png',
+			preview: 'Chloé négocie l\'âge auquel elle aura son trousseau de clés...',
+			content: 'Chloé réclame depuis quelque temps d’aller à l’école toute seule.\n\n— Tu sais, Chloé, pour ça, il te faudrait aussi un trousseau de clés.\n— Je veux mon trousseau, moi aussi !\n\n— Héléna n’a eu le sien qu’au collège.\n— Alexandre aussi, il l’a eu au collège.\n\n— Et Chloé aura son trousseau quand elle sera au…\n\nChloé sourit, malicieuse :\n— Au CE2 ! Donc c’est bon, j’ai mon trousseau.'
+		},
+		{
+			id: 37,
+			character: 'chloe',
+			title: 'L’auto‑portrait flatteur',
+			image: 'images/famille_55.png',
+			preview: 'Chloé dessine ses meilleures amies et réserve les meilleurs qualités pour elle...',
+			content: 'Je découvre dans le petit sac de Chloé une feuille pliée contenant une bande dessinée qu’elle a réalisée.\n\nPremière vignette : une petite fille.\nCommentaire : « Elle, c’est Maélia, la plus sympa de toutes mes copines. »\n\nDeuxième vignette : une autre fille.\nCommentaire : « Elle, c’est Sophia, la plus intelligente de mes copines. »\n\nTroisième vignette : encore une autre.\nCommentaire : « Elle, c’est Océane, la plus belle de mes copines. »\n\nQuatrième vignette : une fille souriante.\nCommentaire : « Là, c’est moi, Chloé : la plus sympa, la plus intelligente et la plus belle. »'
+		},
+		{
+			id: 38,
+			character: 'alexander',
+			title: 'La présentation pour la VAE',
+			image: 'images/famille_59.png',
+			preview: 'Alexandre suggère une introduction pour la VAE de sa maman...',
+			content: 'Alexandre écoute sa maman s’entraîner pour l’oral de sa VAE d’auxiliaire de puériculture.\n\n— Maman, tu dois te présenter comme ça :\n« Mesdames les membres du jury, je m’appelle Malika Chelouah, j’ai 48 ans et j’ai trois merveilleux enfants… surtout le deuxième. »'
+		},
+		{
+			id: 39,
+			character: 'chloe',
+			title: 'Changer de classe ? Pas question !',
+			image: 'images/famille_58.png',
+			preview: 'Chloé refuse de changer de classe même si d\'autres élèves la perturbent...',
+			content: '— Tu me dis qu’il y a beaucoup d’élèves qui perturbent ta classe et empêchent tout le monde de travailler ?\n\nChloé acquiesce.\n\n— Alors tu ne verrais pas d’inconvénient à ce que je demande à te changer de classe, pour que tu sois dans de meilleures conditions ?\n\n— Si ! Pourquoi ce serait moi qui devrais partir, alors que ce sont les autres qui perturbent ?'
+		}
+
         ];
 
         // ===== GESTION DES HISTOIRES =====
