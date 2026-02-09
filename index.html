@@ -826,6 +826,44 @@
   background: #000;
 }
 
+.site-header{
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header > img.header-img{
+  height: 100%;
+  width: auto;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.site-header h1{
+  /* fallback lisible si l’effet n’est pas supporté */
+  color: #fff;
+}
+
+@supports (-webkit-background-clip: text) and (-webkit-text-fill-color: transparent) {
+  .site-header h1{
+    background-image: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet, red);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    animation: rainbowShift 4s linear infinite;
+  }
+
+  @keyframes rainbowShift{
+    from { background-position: 0% 50%; }
+    to   { background-position: 100% 50%; }
+  }
+}
+
+
+
 
 </style>
 
@@ -834,18 +872,17 @@
 <header class="site-header">
   <div class="snowflakes-container" id="snowflakesContainer"></div>
 
-  <img class="header-photo header-photo--left"
-       src="images/enfants.png"
-       alt="Enfants">
+<img class="header-photo header-photo--left header-img"
+     src="images/enfants.png" alt="Enfants">
+
 
   <div class="header-center">
     <h1>Nos petites histoires</h1>
     <p>Un trésor de souvenirs familiaux</p>
   </div>
 
-  <img class="header-photo header-photo--right"
-       src="images/parents.png"
-       alt="Parents">
+ <img class="header-photo header-photo--right header-img"
+     src="images/parents.png" alt="Parents">
 </header>
 
 
@@ -877,9 +914,9 @@
         <div class="section" id="about-section">
             <div class="about-section">
                 <h2> Bienvenue et bonne lecture</h2>
-                <p>Ce site a été créé pour nous replonger dans les moments merveilleux et drôles que nous avons vécus avec vous  : <strong>Héléna</strong>, <strong>Alexandre</strong> et <strong>Chloé</strong>.</p>
+                <p>Ce site a été créé pour nous replonger ensemble dans les moments merveilleux et drôles que nous avons vécus avec nos enfants  : <strong>Héléna</strong>, <strong>Alexandre</strong> et <strong>Chloé</strong>.</p>
                 <p>Chaque histoire recueillie ici est un petit instant de tendresse, de joie, d'insouciance et d'enfance que nous avons souhaité, votre maman et moi, conserver dans notre coeur et partager avec vous.</p>
-                <p>Nous vous proposons un voyage dans le passé, celui de votre enfance qui était fait de rires, d'émotions et de souvenirs précieux. Ces moments simples de la vie quotidienne sont en réalité les plus grands cadeaux que vous avez pu nous offrir.</p>
+                <p>Nous vous proposons ici un petite voyage rétrospectif dans le passé, celui de votre enfance qui était fait de rires, d'émotions et de souvenirs précieux. Ces moments simples de la vie quotidienne sont en réalité le plus beau cadeau que vous avez pu nous offrir.</p>
 				
                 <hr style="margin: 2rem 0; border: none; border-top: 2px solid #eee;">
 				
@@ -897,10 +934,10 @@
 				  </video>
 				</div>
 				
-                <h3>Votre personnalité a émergé jour après jour</h3>
-				<p><strong style="color: #98d98e;">Héléna 💚</strong> - Responsable et droite, tu est le pilier de la fratrie avec son caractère affirmé.</p>
+                <h3>Votre personnalité a émergé jour après jour et éclaire l'avenir :</h3>
+				<p><strong style="color: #98d98e;">Héléna 💚</strong> - Responsable et droite, tu est le pilier de la fratrie avec ton caractère affirmé.</p>
 				<p><strong style="color: #87ceeb;">Alexandre 🔵</strong> - Tendre, curieux et plein de sensibilité, tu as des mots et des gestes d'une grande sagesse et d'une grande noblesse.</p>
-                <p><strong style="color: #ff69b4;">Chloé 💕</strong> - Malicieuse, créative et pleine d'humour, tu nous as régalés de ses réparties et de ses petites ruses.</p>
+                <p><strong style="color: #ff69b4;">Chloé 💕</strong> - Malicieuse, créative et pleine d'humour, tu nous as régalés de tes réparties et de tes petites ruses.</p>
                 
                 
             </div>
@@ -1083,7 +1120,7 @@
 			id: 13,
 			character: 'alexander',
 			title: 'La boule rebondissante pour la grande sœur',
-			image: 'images/famille_60.png',
+			image: 'images/famille_1.png',
 			preview: 'Au magasin Carrefour, Alexandre demande une boule pour sa grande sœur...',
 			content: 'Au Carrefour de Voiron, un animateur fait des tours de magie et offre des boules rebondissantes aux enfants. Chloé reçoit la sienne.\n\nQuand vient le tour d’Alexandre, il dit au magicien :\n— Ce serait très gentil si vous pouviez m’en donner une pour ma grande sœur qui n’est pas venue. Je suis sûr que ça lui ferait très plaisir.\n\n— Je n’en ai pas beaucoup… mais comme tu l’as demandé si gentiment, en voilà une pour ta grande sœur.'
 		},
@@ -1295,7 +1332,52 @@
 			image: 'images/famille_58.png',
 			preview: 'Chloé refuse de changer de classe même si d\'autres élèves la perturbent...',
 			content: '— Tu me dis qu’il y a beaucoup d’élèves qui perturbent ta classe et empêchent tout le monde de travailler ?\n\nChloé acquiesce.\n\n— Alors tu ne verrais pas d’inconvénient à ce que je demande à te changer de classe, pour que tu sois dans de meilleures conditions ?\n\n— Si ! Pourquoi ce serait moi qui devrais partir, alors que ce sont les autres qui perturbent ?'
+		},
+		{
+			id: 40,
+			character: 'helena',
+			title: 'La fleur du deuxième étage',
+			image: 'images/famille_3.png',
+			preview: 'À la résidence universitaire d’Antony, Héléna offre une fleur… dont l’origine intrigue.',
+			content: 'Ce jour‑là, à la résidence universitaire d’Antony, nous recevions un couple d’amis kabyles, comme nous : lui préparait une thèse scientifique, elle une spécialisation en cardiologie. Ils étaient venus avec leur petite fille, et Héléna en profitait pour sociabiliser et s’amuser.\n\nAu milieu d’une conversation, Héléna vient me voir et me tend une jolie fleur fraîchement cueillie. Je souris, je prends la fleur et je la remercie affectueusement.\n\nC’est à ce moment que Malika arrive, sur un ton léger et complice :\n— D’où elle sort, cette fleur ?\n\nJe reste silencieux quelques secondes. Nous habitons au deuxième étage. Il n’y a évidemment aucune fleur dans l’appartement.\n\nC’est alors que je réalise ce qui s’est passé : pendant que tout le monde parlait, Héléna a profité de l’inattention générale pour sortir discrètement de l’appartement, descendre les escaliers, traverser le hall, contourner le bâtiment, se rendre jusqu’au petit coin de verdure derrière la résidence, cueillir une fleur… puis remonter tout aussi discrètement.\n\nElle revient dans le salon, parfaitement calme, comme si elle n’avait jamais quitté la pièce. Je la regarde, partagé entre la tendresse, la surprise et la lente prise de conscience de son escapade silencieuse.'
+		},
+
+		{
+			id: 41,
+			character: 'helena',
+			title: 'Debout, mais endormie à Presles',
+			image: 'images/famille_2.png',
+			preview: 'À la fête de Lutte Ouvrière à Presles, Héléna finit la journée debout… en dormant.',
+			content: 'Héléna avait six ans cette année‑là, lorsque nous sommes allés, comme chaque Pentecôte, à la fête de Lutte Ouvrière à Presles. C’était notre rendez‑vous annuel : retrouver des amis, rire, s’amuser, goûter aux spécialités du monde entier et chercher à changer le monde avec des camarades venus de partout. Là‑bas, les enfants sont rois.\n\nNous avions inscrit Héléna au club enfants, où des militants animateurs organisaient des activités riches et variées selon l’âge et les affinités. L’endroit avait de quoi plaire : jeux, ateliers, maquillage, déguisements… Héléna, âgée de six ans, nous quitta très vite pour rejoindre les différents ateliers. Le contact avec les autres enfants avait de quoi la stimuler et la réjouir.\n\nEn fin de journée, elle était épuisée. Quand Malika et moi avons décidé de rentrer à la maison, Héléna avait du mal à quitter les lieux. La tenant par la main, nous nous sommes rendus à la sortie du club enfants, très bien gardée, pour signaler sa sortie. Nous avons attendu tranquillement derrière la queue qui s’était formée et, lorsque ce fut notre tour, j’ai indiqué à la dame le nom de ma fille et sa sortie définitive.\n\nLa dame me regarde alors attentivement et me dit :\n— Vous n’avez pas remarqué que votre fille est en train de dormir ?\n\nJe regarde Héléna : elle était debout, me tenant la main, mais elle dormait profondément. Confus, je l’ai aussitôt portée dans mes bras et je suis allé rejoindre Malika, qui était avec un groupe d’amis. Oui, nous avions sans doute un peu tardé… mais Héléna s’était bien défoulée.'
+		},
+
+		{
+			id: 42,
+			character: 'helena',
+			title: 'La petite acrobate du berceau',
+			image: 'images/famille_35.png',
+			preview: 'Héléna, pressée de marcher et surtout de grimper, surprend ses parents par un exploit inattendu.',
+			content: 'Héléna était pressée de marcher, mais surtout de grimper. Ramper, elle avait appris à le faire très tôt : elle avait hâte de découvrir l’univers autour d’elle et de l’explorer à sa hauteur. Elle a ensuite cherché à se mettre debout en s’appuyant contre un mur, ce qu’elle est parvenue à faire progressivement, jusqu’à se lancer et marcher un jour où je n’étais pas à la maison. Malika avait les étoiles devant les yeux en m’en informant le soir. C’était merveilleux de la voir faire ses premiers pas.\n\nCe soir‑là, après lui avoir donné son biberon, je sentais bien qu’elle était fatiguée et qu’elle avait besoin de dormir. Et en effet, elle n’avait pas fini son biberon quand je l’ai portée, ensommeillée, dans son berceau. J’ai relevé la paroi latérale et je suis revenu au séjour pour dire à Malika qu’Héléna était en train de dormir profondément.\n\nC’est alors qu’elle me regarde avec surprise :\n— Tu as oublié de lever la barrière du berceau ?\n\nJe lui réponds que non… et en baissant les yeux, je constate qu’Héléna m’avait suivi. Elle était là, debout, à côté de moi.\n\nJ’ai été stupéfait par l’exploit. Elle avait à peine deux ans et elle était parvenue à monter au‑dessus de la barrière et à redescendre, comme une acrobate, mais avec minutie et maîtrise, sans se faire mal.'
+		},
+		
+		{
+			id: 43,
+			character: 'helena',
+			title: 'La fugue vers la crèche',
+			image: 'images/famille_36.png',
+			preview: 'À l’école maternelle, Héléna refuse la sieste… jusqu’à disparaître complètement.',
+			content: 'Depuis qu’on l’avait inscrite à l’école maternelle, Héléna était rebelle aux différentes règles que l’institution cherchait à imposer. Parmi elles, la sieste obligatoire de l’après‑midi. Pour la plupart des enfants, c’était un moment de repos. Pour Héléna, c’était une perte de temps : elle ne voulait pas dormir alors qu’il y avait tant de choses à découvrir.\n\nLes observations du personnel enseignant se succédaient régulièrement, jusqu’au jour où, en venant la chercher en fin d’après‑midi, l’enseignante s’approche de nous, catastrophée. Héléna avait encore franchi les limites.\n\nÀ un moment, on l’avait perdue de vue. Ils l’avaient cherchée partout dans l’école, sans aucune trace d’elle, jusqu’à ce qu’on entende le carillon du portail. C’était une dame de la crèche, qui jouxtait l’école maternelle, qui arrivait avec Héléna pour nous dire qu’elle s’était retrouvée dans la cour de la crèche, sans trop savoir comment elle avait fait.\n\nMalika et moi étions surpris et en même temps très inquiets de ce qui avait pu se passer. On se demande encore comment Héléna est parvenue à grimper le grillage qui séparait les deux établissements.'
+		},
+		{
+			id: 44,
+			character: 'helena',
+			title: 'La poussée dentaire à 40°C',
+			image: 'images/famille_42.png',
+			preview: 'Une forte fièvre conduit Héléna aux urgences… avant un soulagement inattendu.',
+			content: 'Héléna, encore bébé, était fiévreuse ce soir‑là. En mesurant sa température, sa maman et moi avons constaté qu’elle dépassait les 40 °C. Nous avons alors pris la décision de nous rendre aux urgences de la clinique d’Antony.\n\nArrivés là‑bas, nous n’avons pas tardé à rencontrer un médecin de garde. Après l’avoir auscultée, il lui ouvre la bouche et constate que sa gencive est gonflée. Il nous rassure aussitôt :\n— Il n’y a rien de grave ! Votre enfant fait une poussée dentaire et sa gencive résiste à la dent qui cherche à percer.\n\nNous avons continué à lui donner un antipyrétique pour faire baisser la fièvre et, le lendemain, nous nous sommes rendus chez sa pédiatre. Elle a pris une tige plate en bois et a limé la gencive à l’endroit qui était gonflé. Héléna a crié sous la douleur et a pleuré.\n\nQuelques heures plus tard, la fièvre avait disparu et Héléna courait de tous les côtés, heureuse de retrouver sa santé et son énergie.'
 		}
+		
+		
 
         ];
 
